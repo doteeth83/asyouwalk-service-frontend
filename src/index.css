@@ -1,0 +1,12 @@
+/*규격 설정*/
+:root {
+  --vh: 100%;
+}
+/*높이가 필요한 곳에 사용 height: calc(var(--vh, 1vh) * 100);*/
+body {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #bababa;
+  max-width: 400px;
+  height: 100vh;
+}
