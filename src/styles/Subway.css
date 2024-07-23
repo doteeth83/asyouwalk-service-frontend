@@ -1,0 +1,62 @@
+/* styles/Subway.css */
+.Subway {
+  width: fit-content;
+  height: 10px;
+  color: white;
+  padding: 8px;
+  margin: 0;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+}
+
+.Subway_1 {
+  background-color: #2a4fad;
+}
+.Subway_2 {
+  background-color: #0e893f;
+}
+.Subway_3 {
+  background-color: #ff5c29;
+}
+.Subway_4 {
+  background-color: #3d7fe0;
+}
+.Subway_5 {
+  background-color: #8c3ddd;
+}
+.Subway_6 {
+  background-color: #c17315;
+}
+.Subway_7 {
+  background-color: #566712;
+}
+.Subway_8 {
+  background-color: #e8206b;
+}
+.Subway_9 {
+  background-color: #e8206b;
+}
+.Subway_8 {
+  background-color: #bfa01a;
+}
+.Subway_bundang {
+  background-color: #ffcc29;
+}
+.Subway_sinbundang {
+  background-color: #990001;
+}
+.Subway_kyungchun {
+  background-color: #57c0c7;
+}
+.Subway_kyungui {
+  background-color: #3ed8ba;
+}
+.Subway_airport {
+  background-color: #71b2d8;
+}
+.Subway_incheon {
+  background-color: #6690c5;
+}
