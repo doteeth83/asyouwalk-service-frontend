@@ -28,6 +28,7 @@ const Landing = () => {
           싶으신가요?
         </p>
         <LongButton
+          type={"goHome"}
           onClick={() => nav("/home")}
           className="Landing-btn"
           text={"탐색하러가기"}

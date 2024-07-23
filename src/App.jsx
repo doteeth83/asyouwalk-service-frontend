@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Landing from "./pages/Landing";
 import Home from "./pages/Home";
+import Road from "./pages/Road";
 
 function App() {
   return (
@@ -13,8 +14,8 @@ function App() {
           {/* 랜딩화면&홈화면 */}
           <Route exact path="/" element={<Landing />} />
           <Route exact path="/home" element={<Home />} />
-          {/* 학과 정보/공지 페이지
-          <Route exact path="/department/:departId" element={<Department />} /> */}
+          {/* 경로 화면*/}
+          <Route exact path="/road" element={<Road />} />
         </Routes>
       </div>
     </BrowserRouter>
