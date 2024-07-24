@@ -1,38 +1,52 @@
 .TargetCard {
-  background-color: white;
   width: 100%;
-  font-size: 10px;
 }
 .place-text-container1,
 .place-text-container2 {
   display: flex;
   flex-direction: column;
+  font-size: 12px;
 }
+
 .target-place-container2,
 .target-place-container {
   position: relative;
+  background-color: white;
   border: 1px solid #e1e1e1;
   margin-top: 30px;
-  padding: 5px 15px 5px 15px;
+  padding: 10px 15px 10px 15px;
   border-radius: 10px;
-  height: 170px;
+  height: 140px;
 }
 
 .target-place-container > img {
-  width: 60px;
-  height: 90px;
-  position: absolute;
-  right: 15px;
-  bottom: 5px;
-}
-.target-place-container2 > img {
   width: 50px;
   height: 70px;
   position: absolute;
   right: 15px;
-  bottom: 5px;
+  bottom: 8px;
+}
+.target-place-container2 > img {
+  width: 40px;
+  height: 50px;
+  position: absolute;
+  right: 15px;
+  bottom: 17px;
 }
 
 .place-text-container2 > p {
-  font-size: 12px;
+  font-size: 10px;
+}
+
+/*hover*/
+.target-place-container2:hover,
+.target-place-container:hover {
+  border: 1px solid #ff4d3f;
+  background-color: #ffedec;
+}
+
+/* 클릭된 상태 */
+.selected {
+  border: 1px solid #ff4d3f;
+  background-color: #ffedec;
 }
