@@ -1,0 +1,55 @@
+.MyPage {
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f8f8;
+  padding-top: 30px;
+}
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profile-item-container {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.route-item-container {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  display: flex;
+  border: 1px solid #ff4d3f;
+  border-radius: 20px;
+  background-color: #ffd7d4;
+  padding: 20px;
+  gap: 10px;
+}
+.route-item-container .col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.line {
+  font-size: 30px;
+  font-weight: 100;
+  color: #ff4d3f;
+}
+
+.stack-container {
+  background-color: white;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+.with-border {
+  border-bottom: 1px solid #d9d9d9;
+}
+.profile-plogging-container {
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+.p-icon {
+  margin-right: 10px;
+  font-size: 15px;
+}

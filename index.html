@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>🦁호랑이는안멋져?</title>
   </head>
   <body>
     <div id="root"></div>
@@ -13,5 +13,14 @@
       type="text/javascript"
       src="//dapi.kakao.com/v2/maps/sdk.js?appkey=02b164af666fca854e520fc925b13c4a"
     ></script>
+    <script
+      src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
+      integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      Kakao.init("%REACT_APP_KAKAO_JS_KEY%");
+    </script>
   </body>
 </html>

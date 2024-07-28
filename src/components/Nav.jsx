@@ -13,7 +13,7 @@ const Nav = () => {
     nav("/home");
   };
   const goRoute = () => {
-    nav("/route");
+    nav("/road");
   };
   const goPlogging = () => {
     nav("/plogging");
@@ -24,14 +24,14 @@ const Nav = () => {
 
   return (
     <div className="Nav">
-      <div className="home">
+      <div onClick={goHome} className="home">
         <IoHomeOutline className="nav-icon" />홈
       </div>
       <div className="giftshop">
         <GoGift className="nav-icon" />
         상점
       </div>
-      <div className="route">
+      <div onClick={goRoute} className="route">
         <LuMapPin className="nav-icon" />
         경로
       </div>
@@ -39,7 +39,7 @@ const Nav = () => {
         <BiLeaf className="nav-icon" />
         플로깅
       </div>
-      <div className="mypage">
+      <div onClick={goMyPage} className="mypage">
         <FiUser className="nav-icon" />
         마이
       </div>

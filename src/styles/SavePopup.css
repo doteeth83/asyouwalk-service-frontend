@@ -1,0 +1,45 @@
+.popup-container {
+  position: fixed; /* 페이지 스크롤에 관계없이 항상 고정되도록 설정합니다. */
+  top: 50%; /* 페이지의 세로 중앙에 위치시킵니다. */
+  left: 50%; /* 페이지의 가로 중앙에 위치시킵니다. */
+  transform: translate(
+    -50%,
+    -50%
+  ); /* 요소의 가로 및 세로 길이의 절반만큼 이동하여 정중앙에 위치시킵니다. */
+  z-index: 1000; /* 다른 요소 위에 표시되도록 z-index를 설정합니다. */
+  background-color: white; /* 팝업 창의 배경색을 설정합니다. */
+  padding: 80px 120px; /* 내부 여백을 추가합니다. */
+  border-radius: 12px; /* 둥근 테두리를 추가합니다. */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 그림자 효과를 추가합니다. */
+  display: flex;
+  flex-direction: column;
+}
+
+.check-icon {
+  color: #00cf43;
+  margin-right: 10px;
+}
+
+.popup-message {
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.verify {
+  width: fit-content; /* 내용에 맞게 버튼의 너비를 조정합니다. */
+  padding: 10px 30px; /* 버튼의 내부 여백을 조정합니다. */
+  margin: auto; /* 버튼을 수평으로 가운데 정렬합니다. */
+  color: #439aff;
+  border: 1px solid #439aff;
+  background-color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.verify:hover {
+  background-color: #439aff;
+  color: white;
+}

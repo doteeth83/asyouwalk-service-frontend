@@ -1,6 +1,13 @@
 .TargetCard {
   width: 100%;
 }
+div.row {
+  height: 150px;
+  gap: 7px;
+}
+div.col {
+  padding: 0;
+}
 .place-text-container1,
 .place-text-container2 {
   display: flex;

@@ -3,13 +3,14 @@
   width: fit-content;
   height: 10px;
   color: white;
-  padding: 8px;
+  padding: 10px;
   margin: 0;
   border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 800;
+  font-weight: 700;
+  font-size: 13px;
 }
 
 .Subway_1 {

@@ -24,3 +24,21 @@
   font-size: 20px;
   color: #5c5c5c;
 }
+/*hover 시 색상 변경*/
+.home:hover,
+.giftshop:hover,
+.route:hover,
+.plogging:hover,
+.mypage:hover {
+  color: #ff4d3f;
+  cursor: pointer;
+}
+
+.home:hover .nav-icon,
+.giftshop:hover .nav-icon,
+.route:hover .nav-icon,
+.plogging:hover .nav-icon,
+.mypage:hover .nav-icon {
+  color: #ff4d3f;
+  cursor: pointer;
+}

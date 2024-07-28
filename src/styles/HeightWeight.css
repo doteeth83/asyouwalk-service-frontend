@@ -1,0 +1,37 @@
+.HeightWeight {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.arrow-back {
+  font-size: 40px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.user-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.height input,
+.weight input {
+  width: 100%;
+}
+.user-form-input {
+  margin-bottom: auto;
+}
+
+.button-container {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center; /* 버튼을 가로로 중앙에 배치합니다. */
+}
+
+.submit-form {
+  width: 100%; /* 필요에 따라 너비를 조정합니다. */
+}

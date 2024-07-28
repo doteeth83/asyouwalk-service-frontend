@@ -20,7 +20,7 @@
   margin-top: 50px;
 }
 .landing-explain {
-  color: #5d5d5d;
+  color: #868686;
 }
 /*버튼 zone*/
 .landing-button-container {
@@ -28,7 +28,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 70px;
+  margin-top: 50px;
 }
 .landing-button-container > p {
   color: #5d5d5d;
