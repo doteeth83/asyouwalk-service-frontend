@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Stack from "react-bootstrap/Stack";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Nav from "../components/Nav.jsx";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import "../styles/MyPage.css";
 // 아이콘
 import { IoIosInformationCircleOutline } from "react-icons/io";
@@ -14,63 +14,60 @@ import { CiFolderOn } from "react-icons/ci";
 import { GoDatabase } from "react-icons/go";
 
 const MyPage = () => {
-  const [userData, setUserData] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
+  const accessToken = localStorage.getItem("kakao_access_token");
   const navigate = useNavigate();
-  const API_BASE_URL = "백엔드 배포 후";
-  const userId = 1; // 임시 id 설정
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/user/${userId}`);
-        setUserData(response.data);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
+    if (accessToken) {
+      axios
+        .get("https://kapi.kakao.com/v2/user/me", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        .then((response) => {
+          setUserInfo(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching user info:", error);
+        });
+    } else {
+      navigate("/home");
+    }
+  }, [accessToken, navigate]);
 
-    fetchUserData();
-  }, [userId]);
-
-  const goHeight = () => {
-    navigate("/height");
-  };
-
-  const goTarget = () => {
-    navigate("/target");
-  };
-
-  if (!userData) return <div>Loading...</div>;
+  if (!userInfo) return <div>Loading...</div>;
 
   return (
     <div className="MyPage">
       <div className="profile-container">
         <div className="">프로필 이미지</div>
-        <h4 className="">{userData.nickname}</h4>
+        <h4 className="">{userInfo.properties.nickname}</h4>
         <button>프로필 수정</button>
       </div>
       <div className="profile-item-container">
         <Container className="route-item-container">
           <Col>
-            <span>🔥</span>소모칼로리: {userData.cal_sum}
+            <span>🔥</span>소모칼로리: {userInfo.kakao_account.profile.cal_sum}
           </Col>
           <span className="line">|</span>
           <Col>
-            <span>🌳</span>탄소 절감량: {userData.car_sum}
+            <span>🌳</span>탄소 절감량: {userInfo.kakao_account.profile.car_sum}
           </Col>
           <span className="line">|</span>
           <Col>
-            <span>💰</span>포인트: {userData.total_point}
+            <span>💰</span>포인트: {userInfo.kakao_account.profile.total_point}
           </Col>
         </Container>
         <div className="profile-information-container">
           <h4>나의 정보/활동</h4>
           <Stack className="stack-container" gap={3}>
-            <div className="p-2 with-border" onClick={goHeight}>
+            <div className="p-2 with-border">
               <IoIosInformationCircleOutline className="p-icon" /> 키/몸무게
               정보
             </div>
-            <div className="p-2 with-border" onClick={goTarget}>
+            <div className="p-2 with-border">
               <BiStoreAlt className="p-icon" />
               나의 취향 저격 장소
             </div>
