@@ -11,7 +11,7 @@ import Mypage from "./pages/MyPage";
 import KakaoLogin from "./pages/KakaoLogin";
 import BodyInfo from "./pages/BodyInfo";
 import Calorie from "./pages/Calorie";
-
+import KakaoCallback from "./pages/KakaoCallback";
 function App() {
   return (
     <BrowserRouter>
@@ -29,6 +29,7 @@ function App() {
           <Route exact path="/target" element={<Target />} />
           {/*로그인 페이지*/}
           <Route path="/login" element={<KakaoLogin />} />
+          <Route path="/login/oauth/kakao" element={<KakaoCallback />} />
           <Route path="/mypage" element={<Mypage />} />
         </Routes>
       </div>

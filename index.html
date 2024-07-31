@@ -13,14 +13,19 @@
       type="text/javascript"
       src="//dapi.kakao.com/v2/maps/sdk.js?appkey=02b164af666fca854e520fc925b13c4a"
     ></script>
-    <script
-      src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
-      integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4"
-      crossorigin="anonymous"
-    ></script>
-
     <script>
-      Kakao.init("%REACT_APP_KAKAO_JS_KEY%");
+      // Load Kakao SDK dynamically
+      (function (d, s, id) {
+        var js,
+          kjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+          return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://developers.kakao.com/sdk/js/kakao.min.js";
+        kjs.parentNode.insertBefore(js, kjs);
+      })(document, "script", "kakao-jssdk");
     </script>
   </body>
 </html>
