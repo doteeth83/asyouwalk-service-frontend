@@ -1,19 +1,21 @@
+import React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../styles/Nav.css";
-//아이콘 import
 import { GoGift } from "react-icons/go";
 import { IoHomeOutline } from "react-icons/io5";
 import { LuMapPin } from "react-icons/lu";
 import { FiUser } from "react-icons/fi";
 import { BiLeaf } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
   const nav = useNavigate();
+  const location = useLocation();
+
   const goHome = () => {
     nav("/home");
   };
   const goRoute = () => {
-    nav("/road");
+    nav("/route/:routeId");
   };
   const goPlogging = () => {
     nav("/plogging");
@@ -24,22 +26,38 @@ const Nav = () => {
 
   return (
     <div className="Nav">
-      <div onClick={goHome} className="home">
+      <div
+        onClick={goHome}
+        className={`home ${location.pathname === "/home" ? "active" : ""}`}
+      >
         <IoHomeOutline className="nav-icon" />홈
       </div>
       <div className="giftshop">
         <GoGift className="nav-icon" />
         상점
       </div>
-      <div onClick={goRoute} className="route">
+      <div
+        onClick={goRoute}
+        className={`route ${
+          location.pathname.startsWith("/route/") ? "active" : ""
+        }`}
+      >
         <LuMapPin className="nav-icon" />
         경로
       </div>
-      <div className="plogging">
+      <div
+        onClick={goPlogging}
+        className={`plogging ${
+          location.pathname === "/plogging" ? "active" : ""
+        }`}
+      >
         <BiLeaf className="nav-icon" />
         플로깅
       </div>
-      <div onClick={goMyPage} className="mypage">
+      <div
+        onClick={goMyPage}
+        className={`mypage ${location.pathname === "/mypage" ? "active" : ""}`}
+      >
         <FiUser className="nav-icon" />
         마이
       </div>

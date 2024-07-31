@@ -4,15 +4,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  height: 170px;
+  height: 130px;
+  width: 100%;
 }
+
 /*아이콘 선택(경로 선택)*/
 .route-choice {
   display: flex;
-  margin-top: 20px;
+  margin-top: 5px;
   margin-bottom: 20px;
-  gap: 80px;
+  gap: 60px;
 }
 .plogging-choice,
 .short-choice,
@@ -20,14 +21,20 @@
   font-size: 30px;
   color: white;
   margin: 0;
+  padding: 1px 25px 1px 25px;
+  box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
 }
 .plogging-choice:hover,
 .short-choice:hover,
-.target-choice:hover {
+.target-choice:hover,
+.plogging-choice.active,
+.short-choice.active,
+.target-choice.active {
   background-color: white;
-  padding: 2px 30px 2px 30px;
-  border-radius: 5px;
+  border: 2px solid white;
+  border-radius: 25px;
   color: #ff4d3f;
+  box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
 }
 
 .route-explain {
@@ -37,6 +44,12 @@
   height: 40px;
   width: 80%;
   border-radius: 6px;
-  padding: 3px 10px 3px 10px;
+
+  display: flex;
+  align-items: center;
   color: white;
+}
+.route-explain p {
+  margin: 0;
+  padding: 10px;
 }

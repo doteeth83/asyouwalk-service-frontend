@@ -1,6 +1,28 @@
+# Node.js dependencies
 /node_modules
-dist/
-build/
 
-#key files
-/cert
+# Build output
+/dist
+/build
+
+# Environment files
+.env
+
+# Certificates (if applicable)
+cert
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE-specific files
+.idea/
+.vscode/
+
+# npm debug log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

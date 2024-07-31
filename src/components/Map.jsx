@@ -9,7 +9,7 @@ const Map = ({ route }) => {
         route.coordinates[0].lat,
         route.coordinates[0].lng
       ),
-      level: 5,
+      level: 7,
     });
 
     const linePath = route.coordinates.map(

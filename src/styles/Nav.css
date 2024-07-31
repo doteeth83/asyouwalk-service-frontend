@@ -5,6 +5,7 @@
   gap: 50px;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 .home,
@@ -41,4 +42,12 @@
 .mypage:hover .nav-icon {
   color: #ff4d3f;
   cursor: pointer;
+}
+
+.Nav div.active {
+  color: #ff4d3f; /* 활성화된 경로의 색상 */
+}
+
+.Nav div.active .nav-icon {
+  color: #ff4d3f; /* 활성화된 경로의 아이콘 색상 */
 }
