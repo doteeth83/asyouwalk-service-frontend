@@ -16,15 +16,16 @@ const Landing = () => {
           선택하면
         </h1>
         <p className="landing-explain">
-          최단 경로부터, 플로깅 경로
-          <br /> 숨은 나의 취향 저격 장소를 포함한 경로까지
+          일상속 경로에서 wellness한 경험을! <br />
+          최단 경로부터, 플로깅 경로, <br />
+          숨은 나의 취향 저격 장소를 포함한 경로까지
           <br />
-          전부 알려드릴게요
+          전부 알려드려요
         </p>
       </div>
       <div className="landing-button-container">
         <p>
-          지금 바로 <span className="new-road">새로운 경로</span>를 탐색하고
+          지금 바로 <span className="new-road">새로운 경험</span>을 하고
           싶으신가요?
         </p>
         <LongButton

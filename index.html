@@ -2,16 +2,22 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>🦁호랑이는안멋져?</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script
       type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=02b164af666fca854e520fc925b13c4a"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9fdf903778b479ec9d21622cc26a206c"
+    ></script>
+    <script
+      src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
+      integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4"
+      crossorigin="anonymous"
     ></script>
     <script>
       // Load Kakao SDK dynamically
@@ -24,6 +30,7 @@
         js = d.createElement(s);
         js.id = id;
         js.src = "https://developers.kakao.com/sdk/js/kakao.min.js";
+        js.defer = true; // defer 속성 사용
         kjs.parentNode.insertBefore(js, kjs);
       })(document, "script", "kakao-jssdk");
     </script>

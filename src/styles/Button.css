@@ -99,3 +99,38 @@
   position: relative;
   transition: all 0.3s ease;
 }
+
+/*플로깅 사진 저장하기 버튼*/
+
+.button_plogging {
+  width: 100%;
+  height: 65px;
+  padding: 10px;
+  background-color: #ffffff;
+  color: #52a8f8;
+  border: 1px solid #52a8f8;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.button_plogging:hover {
+  width: 100%;
+  height: 65px;
+  padding: 10px;
+  background-color: #52a8f8;
+  color: #ffffff;
+  border: 1px solid #52a8f8;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  position: relative;
+  transition: all 0.3s ease;
+}

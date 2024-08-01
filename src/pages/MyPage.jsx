@@ -12,12 +12,15 @@ import { BiStoreAlt } from "react-icons/bi";
 import { LuSubtitles } from "react-icons/lu";
 import { CiFolderOn } from "react-icons/ci";
 import { GoDatabase } from "react-icons/go";
-
+import BodyInfo from "./BodyInfo.jsx";
 const MyPage = () => {
   const [userInfo, setUserInfo] = useState(null);
   const accessToken = localStorage.getItem("kakao_access_token");
   const navigate = useNavigate();
 
+  const BodyInfo = () => {
+    navigate("/user/info");
+  };
   useEffect(() => {
     if (accessToken) {
       axios
@@ -33,7 +36,7 @@ const MyPage = () => {
           console.error("Error fetching user info:", error);
         });
     } else {
-      navigate("/home");
+      navigate("/login");
     }
   }, [accessToken, navigate]);
 
@@ -42,28 +45,28 @@ const MyPage = () => {
   return (
     <div className="MyPage">
       <div className="profile-container">
-        <div className="">프로필 이미지</div>
+        <div className="">{userInfo.properties.image}</div>
         <h4 className="">{userInfo.properties.nickname}</h4>
         <button>프로필 수정</button>
       </div>
       <div className="profile-item-container">
         <Container className="route-item-container">
           <Col>
-            <span>🔥</span>소모칼로리: {userInfo.kakao_account.profile.cal_sum}
+            <span>🔥</span>소모칼로리 {userInfo.kakao_account.profile.cal_sum}
           </Col>
           <span className="line">|</span>
           <Col>
-            <span>🌳</span>탄소 절감량: {userInfo.kakao_account.profile.car_sum}
+            <span>🌳</span>탄소 절감량 {userInfo.kakao_account.profile.car_sum}
           </Col>
           <span className="line">|</span>
           <Col>
-            <span>💰</span>포인트: {userInfo.kakao_account.profile.total_point}
+            <span>💰</span>포인트 {userInfo.kakao_account.profile.total_point}
           </Col>
         </Container>
         <div className="profile-information-container">
           <h4>나의 정보/활동</h4>
           <Stack className="stack-container" gap={3}>
-            <div className="p-2 with-border">
+            <div className="p-2 with-border" onClick={BodyInfo}>
               <IoIosInformationCircleOutline className="p-icon" /> 키/몸무게
               정보
             </div>

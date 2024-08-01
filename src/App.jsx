@@ -12,6 +12,7 @@ import KakaoLogin from "./pages/KakaoLogin";
 import BodyInfo from "./pages/BodyInfo";
 import Calorie from "./pages/Calorie";
 import KakaoCallback from "./pages/KakaoCallback";
+import PloggingRegister from "./pages/PloggingRegister";
 function App() {
   return (
     <BrowserRouter>
@@ -22,9 +23,10 @@ function App() {
           <Route exact path="/home" element={<Home />} />
           {/* 경로 화면*/}
           <Route exact path="/route/:routeId" element={<RoadDetail />} />
-
+          {/* 플로깅 화면*/}
+          <Route exact path="/plogging" element={<PloggingRegister />} />
           {/* 마이페이지*/}
-          <Route exact path="/bodyinfo" element={<BodyInfo />} />
+          <Route exact path="/user/info" element={<BodyInfo />} />
           <Route exact path="/user/allCal" element={<Calorie />} />
           <Route exact path="/target" element={<Target />} />
           {/*로그인 페이지*/}
