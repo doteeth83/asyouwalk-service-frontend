@@ -11,7 +11,7 @@ const Home = () => {
     if (mapContainer.current) {
       // 기본 지도 옵션을 설정합니다.
       let mapOption = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 기본 중심 좌표
+        center: new kakao.maps.LatLng(37.46849, 127.0395), // 기본 중심 좌표
         level: 3, // 기본 확대 수준
       };
 
@@ -30,7 +30,7 @@ const Home = () => {
         });
       } else {
         // geolocation을 사용할 수 없는 경우 기본 위치로 설정합니다.
-        let locPosition = new kakao.maps.LatLng(33.450701, 126.570667);
+        let locPosition = new kakao.maps.LatLng(37.46849, 127.0395);
         let message = "geolocation을 사용할 수 없어요..";
 
         displayMarker(locPosition, message);
@@ -51,7 +51,7 @@ const Home = () => {
           removable: iwRemoveable,
         });
 
-        infowindow.open(map, marker); // 수정된 부분: infowindow.open(map, marker);
+        infowindow.open(map, marker);
         map.setCenter(locPosition);
       }
     }

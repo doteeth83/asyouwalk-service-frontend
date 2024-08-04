@@ -4,43 +4,7 @@ import "../styles/Road.css";
 import Map from "../components/Map";
 import Header from "../components/Header";
 import Nav from "../components/Nav";
-import Stack from "react-bootstrap/Stack";
-const routes = [
-  {
-    id: 1,
-    coordinates: [
-      { lat: 37.55754, lng: 126.9246 },
-      { lat: 37.58754, lng: 126.9746 },
-      { lat: 37.62476, lng: 126.9159 },
-    ],
-    duration: "30분",
-    calories: 200,
-    co2: 1.5,
-    points: 50,
-  },
-  {
-    id: 2,
-    coordinates: [
-      { lat: 37.5665, lng: 126.978 },
-      { lat: 37.5651, lng: 126.9895 },
-    ],
-    duration: "40분",
-    calories: 250,
-    co2: 2.0,
-    points: 60,
-  },
-  {
-    id: 3,
-    coordinates: [
-      { lat: 37.5643, lng: 126.9982 },
-      { lat: 37.5718, lng: 126.986 },
-    ],
-    duration: "20분",
-    calories: 150,
-    co2: 1.0,
-    points: 40,
-  },
-];
+import shortRouteList from "../util/shortRouteList"; // 경로 목록 임포트
 
 const RouteDetail = () => {
   const { routeId } = useParams();
@@ -48,7 +12,7 @@ const RouteDetail = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
-    const selectedRoute = routes.find(
+    const selectedRoute = shortRouteList.find(
       (route) => route.id === parseInt(routeId)
     );
     if (selectedRoute) {

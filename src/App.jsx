@@ -8,17 +8,19 @@ import Home from "./pages/Home";
 import RoadDetail from "./pages/RoadDetail";
 import Target from "./pages/Target";
 import Mypage from "./pages/MyPage";
-import KakaoLogin from "./pages/KakaoLogin";
+
 import BodyInfo from "./pages/BodyInfo";
 import Calorie from "./pages/Calorie";
-import KakaoCallback from "./pages/KakaoCallback";
+
 import PloggingRegister from "./pages/PloggingRegister";
+import Category from "./pages/Ex";
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
         <Routes>
           {/* 랜딩화면&홈화면 */}
+          <Route exact path="/test" element={<Category />} />
           <Route exact path="/" element={<Landing />} />
           <Route exact path="/home" element={<Home />} />
           {/* 경로 화면*/}
@@ -30,8 +32,7 @@ function App() {
           <Route exact path="/user/allCal" element={<Calorie />} />
           <Route exact path="/target" element={<Target />} />
           {/*로그인 페이지*/}
-          <Route path="/login" element={<KakaoLogin />} />
-          <Route path="/login/oauth/kakao" element={<KakaoCallback />} />
+
           <Route path="/mypage" element={<Mypage />} />
         </Routes>
       </div>

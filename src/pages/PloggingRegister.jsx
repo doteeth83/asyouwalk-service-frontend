@@ -4,37 +4,48 @@ import Nav from "../components/Nav";
 import "../styles/PloggingRegister.css";
 import { CiImageOn } from "react-icons/ci";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const PloggingRegister = () => {
-  const [ploggingImg, setPloggingImg] = useState(null);
+  const navigate = useNavigate();
   const [previewImg, setPreviewImg] = useState("");
   const [selectedFileName, setSelectedFileName] = useState("");
   const [imageFile, setImageFile] = useState(null);
+  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
 
-  const uploadToS3 = async (imageFile) => {
+  const uploadToS3 = async (file) => {
     const formData = new FormData();
-    formData.append("image", imageFile);
+    formData.append("file", file);
 
-    const response = await axios.post(
-      "http://localhost:3000/api/plogging/upload",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-
-    return response.data.imageUrl;
+    try {
+      const response = await axios.post(
+        "http://43.203.247.164:8080/api/plogging/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("서버 응답:", response.data);
+      return response.data.pictureUrl; // 올바른 필드를 참조하도록 수정
+    } catch (error) {
+      console.error("Image upload failed:", error);
+      throw new Error("Image upload failed");
+    }
   };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
 
     if (file) {
-      setPreviewImg(URL.createObjectURL(file));
+      const previewUrl = URL.createObjectURL(file);
+      setPreviewImg(previewUrl);
       setImageFile(file);
       setSelectedFileName(file.name);
+
+      // 메모리 누수를 방지하기 위해 이전 URL을 해제합니다.
+      return () => URL.revokeObjectURL(previewUrl);
     }
   };
 
@@ -50,11 +61,14 @@ const PloggingRegister = () => {
 
     try {
       const imageUrl = await uploadToS3(imageFile);
-      setPloggingImg(imageUrl);
-
+      if (!imageUrl) {
+        throw new Error("Image URL is undefined");
+      }
+      setUploadedImageUrl(imageUrl);
       console.log("이미지 URL:", imageUrl);
     } catch (error) {
-      alert("이미지 업로드에 실패했습니다");
+      alert("이미지 업로드에 실패했습니다.");
+      console.error("Error:", error);
     }
   };
 
@@ -92,7 +106,11 @@ const PloggingRegister = () => {
           type={"plogging"}
           onClick={handleSubmit}
         />
-        <LongButton text={"경로 화면으로"} type={"register"} />
+        <LongButton
+          text={"경로 화면으로"}
+          type={"register"}
+          onClick={() => navigate(-1)}
+        />
       </div>
       <div className="nav-container">
         <Nav />

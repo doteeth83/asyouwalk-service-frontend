@@ -1,13 +1,27 @@
+import React, { useState, useEffect } from "react";
 import "../styles/Header.css";
-import { useState } from "react";
 import { BiLeaf } from "react-icons/bi";
 import { FaPersonRunning } from "react-icons/fa6";
 import { TbTargetArrow } from "react-icons/tb";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import shortRouteList from "../util/shortRouteList";
 
 const Header = () => {
   const nav = useNavigate();
+  const { routeId } = useParams();
   const [activeChoice, setActiveChoice] = useState(null);
+  const [route, setRoute] = useState(null);
+
+  useEffect(() => {
+    const selectedRoute = shortRouteList.find(
+      (route) => route.id === parseInt(routeId)
+    );
+    if (selectedRoute) {
+      setRoute(selectedRoute);
+    } else {
+      console.error("해당 id의 루트를 찾을 수 없습니다: ", routeId);
+    }
+  }, [routeId]);
 
   const handleClick = (choice) => {
     setActiveChoice(choice);
@@ -40,7 +54,13 @@ const Header = () => {
         </div>
       </div>
       <div className="route-explain">
-        <p>홍대입구역 -&gt; 연신내역</p>
+        {route ? (
+          <p>
+            {route.start} -&gt; {route.end}
+          </p>
+        ) : (
+          <p>경로 정보를 불러오는 중...</p>
+        )}
       </div>
     </div>
   );

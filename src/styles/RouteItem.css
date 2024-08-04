@@ -1,0 +1,66 @@
+/*공통 스타일 적용*/
+.arrow-back-white {
+  margin-top: 30px;
+  color: white;
+  font-size: 40px;
+}
+.item-ment {
+  margin-top: 50px;
+}
+.item_total {
+  display: flex;
+  gap: 50px;
+}
+.total-text {
+  display: flex;
+  align-items: flex-end;
+}
+.total-sum-item {
+  font-weight: 900;
+  font-size: 60px;
+  margin-right: 20px;
+}
+.total-unit {
+  margin-bottom: 15px;
+}
+.item-announce {
+  background-color: white;
+  height: 100px;
+  margin-top: 60px;
+  border-radius: 20px;
+  position: relative;
+}
+.delete-icon {
+  color: rgb(174, 174, 174);
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 20px;
+}
+.item-statistics {
+  background-color: white;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+/*칼로리 존*/
+.Calorie {
+  height: 100vh;
+}
+.calorie-container {
+  color: white;
+  height: 600px;
+  background-color: #737fee;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.item-statistics {
+  order: -1; /* This will move the item-statistics to the top */
+  width: 100%;
+  background-color: #f8f8f8;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  /* Add any additional styling you need for item-statistics */
+}

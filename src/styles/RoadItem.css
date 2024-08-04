@@ -1,0 +1,44 @@
+.RoadItem {
+  background-color: #f8f8f8;
+  padding: 20px;
+}
+.subway-mark {
+  display: flex;
+  gap: 10px;
+  margin-left: 10px;
+}
+.route-start-point,
+.route-end-point {
+  display: flex;
+  padding: 25px 10px 25px 10px;
+  gap: 10px;
+  margin-top: 20px;
+  background-color: white;
+  border-radius: 20px;
+  width: 90%;
+}
+.start-mark {
+  border: 1px solid #52a8f8;
+  width: 20px;
+  border-radius: 1000px;
+  height: 20px;
+
+  margin-right: 20px;
+}
+.end-mark {
+  border: 1px solid #ff0e0e;
+  width: 20px;
+  border-radius: 1000px;
+  height: 20px;
+
+  margin-right: 20px;
+}
+.route-start,
+.end-start {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.RoadButton {
+  margin-top: 10px;
+}
