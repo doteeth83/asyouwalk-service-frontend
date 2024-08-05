@@ -66,7 +66,7 @@ function Register() {
       <IoIosArrowBack onClick={() => nav(-1)} className="arrow-back-black" />
       <div className="Neright-section">
         <h2>회원가입</h2>
-        <p>회원가입을 통해 더 많은 서비스를 이용해 보세요!</p>
+        <p>회원가입을 통해 걷는대로의 서비스를 이용해 보세요!</p>
 
         <div className="Neinput-container">
           <p>

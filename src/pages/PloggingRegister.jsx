@@ -5,13 +5,14 @@ import "../styles/PloggingRegister.css";
 import { CiImageOn } from "react-icons/ci";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import SavePopup from "../components/SavePopup";
 const PloggingRegister = () => {
   const navigate = useNavigate();
   const [previewImg, setPreviewImg] = useState("");
   const [selectedFileName, setSelectedFileName] = useState("");
   const [imageFile, setImageFile] = useState(null);
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+  const [showSave, setShowSave] = useState(false);
 
   const uploadToS3 = async (file) => {
     const formData = new FormData();
@@ -71,7 +72,12 @@ const PloggingRegister = () => {
       console.error("Error:", error);
     }
   };
-
+  //저장하기 버튼 클릭 핸들러
+  const handlePloggingButton = async (e) => {
+    e.preventDefault(); // 폼 제출 시 페이지가 새로고침되는 것을 방지
+    setShowSave(true);
+    await handleSubmit();
+  };
   return (
     <div className="PloggingRegister">
       <div className="plogging-img-container">
@@ -104,8 +110,9 @@ const PloggingRegister = () => {
         <LongButton
           text={"저장하기"}
           type={"plogging"}
-          onClick={handleSubmit}
+          onClick={handlePloggingButton}
         />
+        {showSave && <SavePopup action="저장" />}
         <LongButton
           text={"경로 화면으로"}
           type={"register"}
