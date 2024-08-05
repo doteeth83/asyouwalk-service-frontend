@@ -1,9 +1,19 @@
 .Home {
-  background-color: white;
+  background-color: #f8f8f8;
   height: 100vh;
   display: flex;
   flex-direction: column;
   position: relative;
+}
+.recomend-route {
+  font-size: 25px;
+
+  font-weight: 500;
+}
+.road-list-container {
+  padding-top: 30px;
+  background-color: #f8f8f8;
+  padding: 20px;
 }
 
 .map-container {
@@ -24,6 +34,9 @@
   border-radius: 10px;
 }
 /*input 클릭시 border*/
+.map-container input {
+  border: 2px solid #ffd7d4;
+}
 .map-container input:focus {
   border: 2px solid #ff4d3f;
   outline: none;

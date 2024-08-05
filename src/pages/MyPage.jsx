@@ -4,7 +4,6 @@ import Stack from "react-bootstrap/Stack";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Nav from "../components/Nav.jsx";
-import { useNavigate } from "react-router-dom";
 import "../styles/MyPage.css";
 // 아이콘
 import { IoIosInformationCircleOutline } from "react-icons/io";
@@ -13,54 +12,46 @@ import { LuSubtitles } from "react-icons/lu";
 import { CiFolderOn } from "react-icons/ci";
 import { GoDatabase } from "react-icons/go";
 import BodyInfo from "./BodyInfo.jsx";
+import { useNavigate } from "react-router-dom";
+
 const MyPage = () => {
   const [userInfo, setUserInfo] = useState(null);
-  const accessToken = localStorage.getItem("kakao_access_token");
   const navigate = useNavigate();
 
-  const BodyInfo = () => {
-    navigate("/user/info");
-  };
   useEffect(() => {
-    if (accessToken) {
-      axios
-        .get("https://kapi.kakao.com/v2/user/me", {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        })
-        .then((response) => {
-          setUserInfo(response.data);
-        })
-        .catch((error) => {
-          console.error("Error fetching user info:", error);
-        });
+    const username = localStorage.getItem("username");
+    const token = localStorage.getItem("token");
+
+    if (token && username) {
+      // API 호출을 통해 사용자 정보를 가져올 수도 있습니다.
+      setUserInfo({ username });
     } else {
       navigate("/login");
     }
-  }, [accessToken, navigate]);
+  }, [navigate]);
 
-  if (!userInfo) return <div>Loading...</div>;
+  if (!userInfo) {
+    return <div>로그인 페이지로 이동합니다.</div>;
+  }
 
   return (
     <div className="MyPage">
       <div className="profile-container">
-        <div className="">{userInfo.properties.image}</div>
-        <h4 className="">{userInfo.properties.nickname}</h4>
+        <h4 className="">{userInfo.username}</h4>
         <button>프로필 수정</button>
       </div>
       <div className="profile-item-container">
         <Container className="route-item-container">
           <Col>
-            <span>🔥</span>소모칼로리 {userInfo.kakao_account.profile.cal_sum}
+            <span>🔥</span>소모칼로리 {userInfo.cal_sum || 0}
           </Col>
           <span className="line">|</span>
           <Col>
-            <span>🌳</span>탄소 절감량 {userInfo.kakao_account.profile.car_sum}
+            <span>🌳</span>탄소 절감량 {userInfo.car_sum || 0}
           </Col>
           <span className="line">|</span>
           <Col>
-            <span>💰</span>포인트 {userInfo.kakao_account.profile.total_point}
+            <span>💰</span>포인트 {userInfo.total_point || 0}
           </Col>
         </Container>
         <div className="profile-information-container">

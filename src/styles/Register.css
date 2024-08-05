@@ -1,0 +1,127 @@
+.Neinput {
+  outline: none;
+}
+
+.Register,
+.Login {
+  height: 100vh;
+}
+.Nelogin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80px;
+  justify-content: center;
+}
+.arrow-back-black {
+  font-size: 30px;
+  margin-top: 30px;
+  margin-left: 20px;
+}
+.Neright-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.Neinput-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 추가: 아이디 입력 칸을 가운데로 정렬 */
+  margin: 20px 0;
+  margin-top: 40px;
+}
+.Nerequired {
+  color: red;
+  font-size: 70%;
+}
+
+.Neright-section h2 {
+  color: #ff4d3f;
+  font-size: 220%;
+}
+
+.Neleft-section p {
+  font-size: 220%;
+  font-weight: bold;
+}
+
+.Neright-section p {
+  color: #c4c4c4;
+}
+
+.Neinput-container p {
+  color: #000000;
+
+  margin-bottom: 8px;
+}
+
+.Nelogin-button {
+  background-color: #cccccc;
+  color: #ffffff;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 4px;
+  margin-top: 15px;
+  width: 150px;
+  transition: background-color 0.3s;
+}
+
+.Nedivider {
+  color: #bdc7d5;
+  margin: 20px 0;
+  margin-top: 50px;
+}
+
+.Nesignup-prompt span {
+  color: #ff4d3f;
+  cursor: pointer;
+}
+
+.Nesignup-prompt {
+  margin-top: 20px;
+  font-size: 90%;
+}
+
+.Neinput-container {
+  margin: 20px 0;
+  margin-top: 40px;
+}
+
+.Neunderline-input {
+  border: none;
+  border-bottom: solid #e6e6e6;
+  font-size: 12px;
+  margin-top: 8px;
+  padding: 10px 5px;
+  width: 350px;
+}
+
+.Necheck-id {
+  margin-top: 20px;
+  border-radius: 7px;
+  padding: 7px 12px 7px 12px;
+  background-color: #cccccc;
+  color: #ffffff;
+  border: none;
+
+  font-size: 14px;
+}
+.Necheck-id:hover,
+.Neid-available-btn,
+.Nelogin-button.active,
+.Nelogin-button:hover,
+.login-button.active,
+.login-button:hover {
+  background-color: #ffd7d4;
+  color: #ff4d3f;
+}
+.login-button {
+  background-color: #cccccc;
+  color: #ffffff;
+  padding: 10px 20px 10px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+}

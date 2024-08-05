@@ -1,23 +1,42 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import "../styles/Home.css";
-import RoadList from "../components/RoadList";
+import RoadItem from "../components/RoadItem";
 import Nav from "../components/Nav";
+import { useNavigate } from "react-router-dom";
+import shortRouteList from "../util/shortRouteList.js";
 
 const Home = () => {
   const mapContainer = useRef(null);
+  const [search, setSearch] = useState("");
+  const nav = useNavigate();
+
+  const onChangeSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const getFilteredData = () => {
+    if (search === "") {
+      return shortRouteList;
+    }
+    return shortRouteList.filter(
+      (route) =>
+        route.start.toLowerCase().includes(search.toLowerCase()) ||
+        route.end.toLowerCase().includes(search.toLowerCase())
+    );
+  };
+
+  const filteredRoutes = getFilteredData();
 
   useEffect(() => {
     if (mapContainer.current) {
-      // 기본 지도 옵션을 설정합니다.
       let mapOption = {
-        center: new kakao.maps.LatLng(37.46849, 127.0395), // 기본 중심 좌표
-        level: 3, // 기본 확대 수준
+        center: new kakao.maps.LatLng(37.46849, 127.0395),
+        level: 3,
       };
 
       let map = new kakao.maps.Map(mapContainer.current, mapOption);
 
-      // 사용자의 위치를 가져와서 지도에 표시합니다.
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
           let lat = position.coords.latitude;
@@ -29,14 +48,12 @@ const Home = () => {
           displayMarker(locPosition, message);
         });
       } else {
-        // geolocation을 사용할 수 없는 경우 기본 위치로 설정합니다.
         let locPosition = new kakao.maps.LatLng(37.46849, 127.0395);
         let message = "geolocation을 사용할 수 없어요..";
 
         displayMarker(locPosition, message);
       }
 
-      // 마커와 인포윈도우를 표시하는 함수입니다.
       function displayMarker(locPosition, message) {
         let marker = new kakao.maps.Marker({
           map: map,
@@ -60,7 +77,12 @@ const Home = () => {
   return (
     <div className="Home">
       <div className="map-container">
-        <input className="search-bar" placeholder="역 이름을 입력해주세요" />
+        <input
+          className="search-bar"
+          placeholder="역 이름을 입력해주세요"
+          value={search}
+          onChange={onChangeSearch}
+        />
         <div
           ref={mapContainer}
           className="map"
@@ -68,7 +90,14 @@ const Home = () => {
         ></div>
       </div>
 
-      <RoadList className="road-list" />
+      <div className="road-list-container">
+        <div className="road-list-title">
+          <span className="recomend-route">🏃🏻 추천 경로</span>
+        </div>
+        {filteredRoutes.map((route) => (
+          <RoadItem key={route.id} route={route} />
+        ))}
+      </div>
       <Nav className="navigation" />
     </div>
   );
