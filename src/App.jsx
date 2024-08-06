@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { Helmet } from "react-helmet";
 import "./App.css";
 //컴포넌트 import
 import Landing from "./pages/Landing";
@@ -20,6 +20,15 @@ import PloggingPhoto from "./pages/PloggingPhoto";
 function App() {
   return (
     <BrowserRouter>
+      <Helmet>
+        <title>🏃🏻 걷는대로</title>
+        <meta property="og:title" content="🏃🏻 걷는대로" />
+        <meta
+          property="og:description"
+          content="일상속 경로에서 wellness한 경험을!"
+        />
+        <meta property="og:image" content="./public/sample.png" />
+      </Helmet>
       <div className="App">
         <Routes>
           {/* 랜딩화면&홈화면 */}
