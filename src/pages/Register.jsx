@@ -11,8 +11,7 @@ function Register() {
   const [password, setPassword] = useState("");
   const [idStatus, setIdStatus] = useState("");
   const [isIdAvailable, setIsIdAvailable] = useState(false);
-
-  const API_BASE_URL = "http://43.203.247.164:8080/api";
+  const API_BASE_URL = "http://15.165.17.77:8080/api";
 
   const isFormFilled =
     userName.length > 0 && memberId.length > 0 && password.length > 0;
@@ -51,7 +50,7 @@ function Register() {
       });
       if (response.data) {
         console.log("회원가입 성공");
-        nav("/home");
+        nav("/login");
       } else {
         alert("회원가입에 실패했습니다.");
       }

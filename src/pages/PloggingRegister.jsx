@@ -14,13 +14,14 @@ const PloggingRegister = () => {
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
   const [showSave, setShowSave] = useState(false);
 
+  const API_BASE_URL = "http://15.165.235.255:8080/api";
   const uploadToS3 = async (file) => {
     const formData = new FormData();
     formData.append("file", file);
 
     try {
       const response = await axios.post(
-        "http://43.203.247.164:8080/api/plogging/upload",
+        `${API_BASE_URL}/plogging/upload`,
         formData,
         {
           headers: {
