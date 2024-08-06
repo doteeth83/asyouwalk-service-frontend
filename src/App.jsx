@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { Helmet } from "react-helmet";
 import "./App.css";
 //컴포넌트 import
 import Landing from "./pages/Landing";
