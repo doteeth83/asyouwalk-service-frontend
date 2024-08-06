@@ -8,7 +8,7 @@ const RoadItem = ({ route }) => {
   const navigate = useNavigate();
 
   const goRoadView = (id) => {
-    navigate(`/route/${id}`);
+    navigate(`/short/${id}`);
   };
 
   return (

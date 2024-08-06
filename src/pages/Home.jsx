@@ -42,25 +42,25 @@ const Home = () => {
           let lat = position.coords.latitude;
           let lon = position.coords.longitude;
 
-          let locPosition = new kakao.maps.LatLng(lat, lon);
-          let message = '<div style="padding:5px;">현 위치</div>';
+          let userLocation = new kakao.maps.LatLng(lat, lon);
+          let infoMessage = '<div style="padding:5px;">현 위치</div>';
 
-          displayMarker(locPosition, message);
+          displayMarker(userLocation, infoMessage);
         });
       } else {
-        let locPosition = new kakao.maps.LatLng(37.46849, 127.0395);
-        let message = "geolocation을 사용할 수 없어요..";
+        let userLocation = new kakao.maps.LatLng(37.46849, 127.0395);
+        let infoMessage = "geolocation을 사용할 수 없어요..";
 
-        displayMarker(locPosition, message);
+        displayMarker(userLocation, infoMessage);
       }
 
-      function displayMarker(locPosition, message) {
+      function displayMarker(userLocation, infoMessage) {
         let marker = new kakao.maps.Marker({
           map: map,
-          position: locPosition,
+          position: userLocation,
         });
 
-        let iwContent = message;
+        let iwContent = infoMessage;
         let iwRemoveable = true;
 
         let infowindow = new kakao.maps.InfoWindow({
@@ -69,7 +69,7 @@ const Home = () => {
         });
 
         infowindow.open(map, marker);
-        map.setCenter(locPosition);
+        map.setCenter(userLocation);
       }
     }
   }, []);

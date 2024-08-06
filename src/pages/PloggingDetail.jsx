@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "../styles/Road.css";
-import Map from "../components/Map";
+import TrashMap from "../components/TrashMap";
 import Header from "../components/Header";
 import Nav from "../components/Nav";
-import shortRouteList from "../util/shortRouteList"; // 경로 목록 임포트
+import PloggingRouteList from "../util/PloggingRouteList"; // 경로 목록 임포트
 
-const RouteDetail = () => {
+const PloggingDetail = () => {
   const { routeId } = useParams();
   const [route, setRoute] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
-  const nav = useNavigate();
 
   useEffect(() => {
-    const selectedRoute = shortRouteList.find(
+    const selectedRoute = PloggingRouteList.find(
       (route) => route.id === parseInt(routeId)
     );
     if (selectedRoute) {
@@ -33,7 +32,7 @@ const RouteDetail = () => {
     <div className="route-detail-container">
       <Header />
       <div className="map-container">
-        <Map route={route} />
+        <TrashMap route={route} />
       </div>
 
       <div className={`route-info ${isExpanded ? "expanded" : ""}`}>
@@ -59,4 +58,4 @@ const RouteDetail = () => {
   );
 };
 
-export default RouteDetail;
+export default PloggingDetail;

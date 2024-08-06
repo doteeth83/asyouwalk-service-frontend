@@ -25,6 +25,13 @@ const Header = () => {
 
   const handleClick = (choice) => {
     setActiveChoice(choice);
+    if (choice === "plogging") {
+      nav(`/plogging/${routeId}`);
+    } else if (choice === "short") {
+      nav(`/short/${routeId}`);
+    } else if (choice === "target") {
+      nav(`/target/${routeId}`);
+    }
   };
 
   return (

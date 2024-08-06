@@ -14,6 +14,7 @@ import BodyInfo from "./pages/BodyInfo";
 import Calorie from "./pages/Calorie";
 
 import PloggingRegister from "./pages/PloggingRegister";
+import PloggingDetail from "./pages/PloggingDetail";
 
 function App() {
   return (
@@ -25,7 +26,8 @@ function App() {
           <Route exact path="/" element={<Landing />} />
           <Route exact path="/home" element={<Home />} />
           {/* 경로 화면*/}
-          <Route exact path="/route/:routeId" element={<RoadDetail />} />
+          <Route path="/short/:routeId" element={<RoadDetail />} />
+          <Route path="/plogging/:routeId" element={<PloggingDetail />} />
           {/* 플로깅 화면*/}
           <Route exact path="/plogging" element={<PloggingRegister />} />
           {/* 마이페이지*/}
