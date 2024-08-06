@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 const MyPage = () => {
   const [userInfo, setUserInfo] = useState(null);
   const navigate = useNavigate();
-  const API_BASE_URL = "http://15.165.17.77:8080/api";
+  const API_BASE_URL = "https://asyouwork.com:8443/api";
 
   const goTarget = () => {
     navigate("/target");

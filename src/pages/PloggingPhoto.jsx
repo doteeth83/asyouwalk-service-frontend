@@ -8,7 +8,7 @@ import "../styles/PloggingPhoto.css"; // CSS 파일을 import 합니다
 
 const PloggingPhoto = () => {
   const [photos, setPhotos] = useState([]);
-  const API_BASE_URL = "http://15.165.17.77:8080/api";
+  const API_BASE_URL = "https://asyouwork.com:8443/api";
 
   useEffect(() => {
     const fetchPhotos = async () => {
