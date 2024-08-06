@@ -11,16 +11,19 @@ function Register() {
   const [password, setPassword] = useState("");
   const [idStatus, setIdStatus] = useState("");
   const [isIdAvailable, setIsIdAvailable] = useState(false);
-  const API_BASE_URL = "http://15.165.17.77:8080/api";
+  const API_BASE_URL = "http://15.165.235.255:8080/api";
 
   const isFormFilled =
     userName.length > 0 && memberId.length > 0 && password.length > 0;
 
   const checkIdAvailability = async () => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/users/check`, {
-        memberId: memberId,
-      });
+      const response = await axios.post(
+        "http://15.165.235.255:8080/api/users/check",
+        {
+          memberId: memberId,
+        }
+      );
       setIsIdAvailable(response.data);
       setIdStatus(
         response.data ? "사용 가능한 아이디입니다." : "중복된 아이디입니다."
@@ -31,33 +34,22 @@ function Register() {
     }
   };
 
-  const handleSubmit = async () => {
-    if (!isFormFilled) {
-      alert("모든 필수 항목을 입력해주세요.");
-      return;
-    }
-
-    if (!isIdAvailable) {
-      alert("아이디 중복을 확인해주세요.");
-      return;
-    }
-
-    try {
-      const response = await axios.post(`${API_BASE_URL}/users/signUp`, {
-        memberId,
+  const handleSignup = () => {
+    axios
+      .post("http://15.165.17.77:8080/api/users/signUp", {
+        memberId: memberId,
+        password: password,
         name: userName,
-        password,
+      })
+      .then((response) => {
+        console.log("회원가입 성공", response.data);
+        nav("/home");
+        alert("회원가입 성공");
+      })
+      .catch((error) => {
+        console.error("회원가입 실패", error);
+        alert("회원가입 실패");
       });
-      if (response.data) {
-        console.log("회원가입 성공");
-        nav("/login");
-      } else {
-        alert("회원가입에 실패했습니다.");
-      }
-    } catch (error) {
-      console.error("회원가입 실패", error);
-      alert("회원가입 중 오류가 발생했습니다.");
-    }
   };
 
   return (
@@ -131,7 +123,7 @@ function Register() {
         <button
           className={`login-button ${isFormFilled ? "active" : ""}`}
           type="button"
-          onClick={handleSubmit}
+          onClick={handleSignup}
           disabled={!isFormFilled}
         >
           입력완료

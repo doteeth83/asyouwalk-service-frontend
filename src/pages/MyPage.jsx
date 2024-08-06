@@ -5,7 +5,6 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Nav from "../components/Nav.jsx";
 import "../styles/MyPage.css";
-// 아이콘
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { BiStoreAlt } from "react-icons/bi";
 import { LuSubtitles } from "react-icons/lu";
@@ -17,14 +16,21 @@ import { useNavigate } from "react-router-dom";
 const MyPage = () => {
   const [userInfo, setUserInfo] = useState(null);
   const navigate = useNavigate();
+  const API_BASE_URL = "http://15.165.235.255:8080/api";
 
   useEffect(() => {
-    const username = localStorage.getItem("username");
-    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
 
-    if (token && username) {
-      // API 호출을 통해 사용자 정보를 가져올 수도 있습니다.
-      setUserInfo({ username });
+    if (userId) {
+      axios
+        .get(`${API_BASE_URL}/users/${userId}`)
+        .then((response) => {
+          setUserInfo(response.data);
+        })
+        .catch((error) => {
+          console.error("Failed to fetch user info", error);
+          navigate("/login");
+        });
     } else {
       navigate("/login");
     }
@@ -37,9 +43,10 @@ const MyPage = () => {
   return (
     <div className="MyPage">
       <div className="profile-container">
-        <h4 className="">{userInfo.username}</h4>
+        <h4 className="">{userInfo.name}</h4>
         <button>프로필 수정</button>
       </div>
+
       <div className="profile-item-container">
         <Container className="route-item-container">
           <Col>
