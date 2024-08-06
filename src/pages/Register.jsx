@@ -10,27 +10,12 @@ function Register() {
   const [userName, setUserName] = useState("");
   const [memberId, setMemberId] = useState("");
   const [password, setPassword] = useState("");
-  const [idStatus, setIdStatus] = useState("");
+
   const [isIdAvailable, setIsIdAvailable] = useState(false);
   const API_BASE_URL = "https://asyouwork.com:8443/api";
 
   const isFormFilled =
     userName.length > 0 && memberId.length > 0 && password.length > 0;
-
-  const checkIdAvailability = async () => {
-    try {
-      const response = await axios.post(`${API_BASE_URL}/users/check`, {
-        memberId,
-      });
-      setIsIdAvailable(response.data);
-      setIdStatus(
-        response.data ? "사용 가능한 아이디입니다." : "중복된 아이디입니다."
-      );
-    } catch (error) {
-      console.error("중복 확인 실패", error);
-      setIdStatus("중복 확인 중 오류가 발생했습니다.");
-    }
-  };
 
   const handleSignup = () => {
     axios
@@ -81,26 +66,6 @@ function Register() {
             value={memberId}
             onChange={(e) => setMemberId(e.target.value)}
           />
-          <button
-            onClick={checkIdAvailability}
-            className={`Necheck-id ${
-              isIdAvailable ? "Neid-available-btn" : ""
-            }`}
-          >
-            중복확인
-          </button>
-          {idStatus && (
-            <div
-              className={`Neid-availability ${
-                isIdAvailable ? "Neid-available" : "Neid-taken"
-              }`}
-            >
-              {idStatus === "중복된 아이디입니다." && (
-                <FiAlertCircle className="Neid-status-icon" />
-              )}
-              {idStatus}
-            </div>
-          )}
         </div>
 
         <div className="Neinput-container">
@@ -114,6 +79,7 @@ function Register() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <p>영어 소문자, 대문자, 특수문자를 포함해주세요</p>
         </div>
 
         <button
