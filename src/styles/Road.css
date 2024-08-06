@@ -29,7 +29,7 @@
 }
 
 .route-info.expanded {
-  height: 55vh; /* 확장된 높이 */
+  height: 65vh; /* 확장된 높이 */
   z-index: 3; /* 확장 시 z-index 높이기 */
 }
 
@@ -62,4 +62,12 @@
   bottom: 0;
   width: 100%;
   z-index: 80;
+}
+
+.route-plogging {
+  border: 1px solid #ff4d3f;
+}
+.route-plogging:hover {
+  border: 1px solid #ff4d3f;
+  background-color: #ffedec;
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "../styles/Road.css";
 import TrashMap from "../components/TrashMap";
 import Header from "../components/Header";
@@ -11,6 +11,10 @@ const PloggingDetail = () => {
   const [route, setRoute] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
 
+  const nav = useNavigate();
+  const goPlogging = () => {
+    nav("/plogging");
+  };
   useEffect(() => {
     const selectedRoute = PloggingRouteList.find(
       (route) => route.id === parseInt(routeId)
@@ -48,6 +52,9 @@ const PloggingDetail = () => {
           <>
             <div className="route-co2">♻️ 탄소절감량: {route.co2}Co2</div>
             <div className="route-points">💰 포인트: + {route.points}</div>
+            <div className="route-plogging" onClick={goPlogging}>
+              🌱 플로깅 인증하러 가기
+            </div>
           </>
         )}
       </div>

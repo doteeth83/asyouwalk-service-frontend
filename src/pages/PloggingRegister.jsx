@@ -68,11 +68,13 @@ const PloggingRegister = () => {
       }
       setUploadedImageUrl(imageUrl);
       console.log("이미지 URL:", imageUrl);
+      navigate("/plogging-photos");
     } catch (error) {
       alert("이미지 업로드에 실패했습니다.");
       console.error("Error:", error);
     }
   };
+
   //저장하기 버튼 클릭 핸들러
   const handlePloggingButton = async (e) => {
     e.preventDefault(); // 폼 제출 시 페이지가 새로고침되는 것을 방지
@@ -121,7 +123,7 @@ const PloggingRegister = () => {
         />
       </div>
       <div className="nav-container">
-        <Nav />
+        <Nav className="navigation" />
       </div>
     </div>
   );

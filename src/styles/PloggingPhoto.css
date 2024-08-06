@@ -1,0 +1,29 @@
+.PloggingPhoto {
+  text-align: center;
+  height: 100vh;
+  position: relative;
+}
+
+.photo-gallery {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.photo-item {
+  margin: 5px;
+}
+
+.photo-item img {
+  width: 100%;
+  margin-left: 20px;
+  height: auto;
+  width: 170px;
+  height: 170px; /* 이미지의 최대 너비를 120px로 제한합니다 */
+}
+.nav-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 80;
+}

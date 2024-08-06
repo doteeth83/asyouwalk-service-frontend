@@ -4,6 +4,7 @@ import "../styles/Register.css";
 import { FiAlertCircle } from "react-icons/fi";
 import axios from "axios";
 import { IoIosArrowBack } from "react-icons/io";
+
 function Register() {
   const nav = useNavigate();
   const [userName, setUserName] = useState("");
@@ -11,23 +12,18 @@ function Register() {
   const [password, setPassword] = useState("");
   const [idStatus, setIdStatus] = useState("");
   const [isIdAvailable, setIsIdAvailable] = useState(false);
-  const API_BASE_URL = "http://15.165.235.255:8080/api";
+  const API_BASE_URL = "http://15.165.17.77:8080/api";
 
-  const isFormFilled =
-    userName.length > 0 && memberId.length > 0 && password.length > 0;
+  const isFormFilled = userName.length > 0 && memberId.length > 0 && password.length > 0;
 
   const checkIdAvailability = async () => {
     try {
       const response = await axios.post(
-        "http://15.165.235.255:8080/api/users/check",
-        {
-          memberId: memberId,
-        }
+        `${API_BASE_URL}/users/check`,
+        { memberId }
       );
       setIsIdAvailable(response.data);
-      setIdStatus(
-        response.data ? "사용 가능한 아이디입니다." : "중복된 아이디입니다."
-      );
+      setIdStatus(response.data ? "사용 가능한 아이디입니다." : "중복된 아이디입니다.");
     } catch (error) {
       console.error("중복 확인 실패", error);
       setIdStatus("중복 확인 중 오류가 발생했습니다.");
@@ -35,21 +31,20 @@ function Register() {
   };
 
   const handleSignup = () => {
-    axios
-      .post("http://15.165.17.77:8080/api/users/signUp", {
-        memberId: memberId,
-        password: password,
-        name: userName,
-      })
-      .then((response) => {
-        console.log("회원가입 성공", response.data);
-        nav("/home");
-        alert("회원가입 성공");
-      })
-      .catch((error) => {
-        console.error("회원가입 실패", error);
-        alert("회원가입 실패");
-      });
+    axios.post(`${API_BASE_URL}/users/signUp`, {
+      memberId,
+      password,
+      name: userName,
+    })
+    .then((response) => {
+      console.log("회원가입 성공", response.data);
+      alert("회원가입 성공");
+      nav("/home");
+    })
+    .catch((error) => {
+      console.error("회원가입 실패", error.response || error);
+      alert("회원가입 실패: " + (error.response?.data || error.message));
+    });
   };
 
   return (
@@ -76,7 +71,6 @@ function Register() {
           <p>
             아이디<span className="Nerequired"> *필수</span>
           </p>
-
           <input
             className="Neunderline-input"
             type="text"
@@ -86,22 +80,13 @@ function Register() {
           />
           <button
             onClick={checkIdAvailability}
-            className={`Necheck-id ${
-              isIdAvailable ? "Neid-available-btn" : ""
-            }`}
+            className={`Necheck-id ${isIdAvailable ? "Neid-available-btn" : ""}`}
           >
             중복확인
           </button>
-
           {idStatus && (
-            <div
-              className={`Neid-availability ${
-                isIdAvailable ? "Neid-available" : "Neid-taken"
-              }`}
-            >
-              {idStatus === "중복된 아이디입니다." && (
-                <FiAlertCircle className="Neid-status-icon" />
-              )}
+            <div className={`Neid-availability ${isIdAvailable ? "Neid-available" : "Neid-taken"}`}>
+              {idStatus === "중복된 아이디입니다." && <FiAlertCircle className="Neid-status-icon" />}
               {idStatus}
             </div>
           )}

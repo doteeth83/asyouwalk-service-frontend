@@ -8,7 +8,7 @@ function Login() {
   const [memberId, setMemberId] = useState("");
   const [password, setPassword] = useState("");
   const nav = useNavigate();
-  const API_BASE_URL = "http://15.165.235.255:8080/api";
+  const API_BASE_URL = "http://15.165.17.77:8080/api";
 
   const isFormFilled = memberId.length > 0 && password.length > 0;
 
@@ -19,6 +19,7 @@ function Login() {
         password: password,
       })
       .then((response) => {
+        console.log('로그인 성공', response.data);
         const userId = response.data.userId;
         localStorage.setItem("userId", userId);
 
@@ -27,7 +28,7 @@ function Login() {
       })
       .catch((error) => {
         console.error("로그인 실패", error);
-        alert("로그인 실패");
+        alert("로그인 실패: " + (error.response?.data || error.message));
       });
   };
 

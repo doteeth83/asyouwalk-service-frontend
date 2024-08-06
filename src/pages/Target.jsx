@@ -45,6 +45,7 @@ const Target = () => {
           />
         </div>
       </div>
+
       <div className="place-register">
         <div className="place-register-text">
           <h4>취향 장소 등록하기</h4>
@@ -56,6 +57,7 @@ const Target = () => {
           onClick={handleTargetButton}
         />
       </div>
+
       {targetSave && <SavePopup action="저장" />}
     </div>
   );

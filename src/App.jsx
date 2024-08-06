@@ -15,6 +15,7 @@ import Calorie from "./pages/Calorie";
 
 import PloggingRegister from "./pages/PloggingRegister";
 import PloggingDetail from "./pages/PloggingDetail";
+import PloggingPhoto from "./pages/PloggingPhoto";
 
 function App() {
   return (
@@ -29,9 +30,11 @@ function App() {
           <Route path="/short/:routeId" element={<RoadDetail />} />
           <Route path="/plogging/:routeId" element={<PloggingDetail />} />
           {/* 플로깅 화면*/}
+
           <Route exact path="/plogging" element={<PloggingRegister />} />
+          <Route exact path="/plogging-photos" element={<PloggingPhoto />} />
           {/* 마이페이지*/}
-          <Route exact path="/user/info" element={<BodyInfo />} />
+          <Route exact path="/body-info" element={<BodyInfo />} />
           <Route exact path="/user/allCal" element={<Calorie />} />
           <Route exact path="/target" element={<Target />} />
           {/*로그인 페이지*/}
