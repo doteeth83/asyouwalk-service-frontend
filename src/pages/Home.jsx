@@ -83,11 +83,7 @@ const Home = () => {
           value={search}
           onChange={onChangeSearch}
         />
-        <div
-          ref={mapContainer}
-          className="map"
-          style={{ width: "100%", height: "400px" }}
-        ></div>
+        <div ref={mapContainer} className="map" style={{ width: "100%" }}></div>
       </div>
 
       <div className="road-list-container">
