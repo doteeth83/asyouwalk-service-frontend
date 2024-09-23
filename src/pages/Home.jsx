@@ -1,100 +1,81 @@
-import React, { useEffect, useRef, useState } from "react";
-import { IoIosSearch } from "react-icons/io";
-import "../styles/Home.css";
-import RoadItem from "../components/RoadItem";
-import Nav from "../components/Nav";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import shortRouteList from "../util/shortRouteList.js";
+import RoadButton from "../components/RoadButton";
+import "../styles/Home.css";
+import Nav from "../components/Nav";
 
 const Home = () => {
-  const mapContainer = useRef(null);
-  const [search, setSearch] = useState("");
+  const [homeMap, setHomeMap] = useState(null);
+  const [startLocation, setStartLocation] = useState("");
+  const [endLocation, setEndLocation] = useState("");
+  const [currentLocation, setCurrentLocation] = useState(null); // 현재 위치 상태 추가
   const nav = useNavigate();
 
-  const onChangeSearch = (e) => {
-    setSearch(e.target.value);
-  };
+  useEffect(() => {
+    const mapInit = (lat, lng) => {
+      const tmap2 = new Tmapv2.Map("map-container", {
+        center: new Tmapv2.LatLng(lat, lng), // 현재 위치를 지도의 중심으로 설정
+        width: "100%",
+        height: "400px",
+        zoom: 15,
+      });
+      setHomeMap(tmap2);
+    };
 
-  const getFilteredData = () => {
-    if (search === "") {
-      return shortRouteList;
+    // 현재 위치 가져오기
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          setCurrentLocation({ lat, lng });
+          mapInit(lat, lng); // 현재 위치를 지도 초기화에 사용
+        },
+        (error) => {
+          console.error("현재 위치를 가져올 수 없습니다.", error);
+          // 위치를 가져오지 못했을 경우 기본 위치로 지도 초기화
+          mapInit(37.5652045, 126.98702028); // 기본 서울 좌표
+        }
+      );
+    } else {
+      // Geolocation을 사용할 수 없을 때 기본 위치로 지도 초기화
+      mapInit(37.5652045, 126.98702028);
     }
-    return shortRouteList.filter(
-      (route) =>
-        route.start.toLowerCase().includes(search.toLowerCase()) ||
-        route.end.toLowerCase().includes(search.toLowerCase())
+  }, []); // 처음에 한 번만 실행
+
+  const handleSearchRoute = () => {
+    if (!startLocation || !endLocation) {
+      alert("출발지와 도착지를 입력해주세요.");
+      return;
+    }
+    // 출발지와 도착지를 query parameter로 전달
+    nav(
+      `/tmap?start=${encodeURIComponent(
+        startLocation
+      )}&end=${encodeURIComponent(endLocation)}`
     );
   };
 
-  const filteredRoutes = getFilteredData();
-
-  useEffect(() => {
-    if (mapContainer.current) {
-      let mapOption = {
-        center: new kakao.maps.LatLng(37.46849, 127.0395),
-        level: 3,
-      };
-
-      let map = new kakao.maps.Map(mapContainer.current, mapOption);
-
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-          let lat = position.coords.latitude;
-          let lon = position.coords.longitude;
-
-          let userLocation = new kakao.maps.LatLng(lat, lon);
-          let infoMessage = '<div style="padding:5px;">현 위치</div>';
-
-          displayMarker(userLocation, infoMessage);
-        });
-      } else {
-        let userLocation = new kakao.maps.LatLng(37.46849, 127.0395);
-        let infoMessage = "geolocation을 사용할 수 없어요..";
-
-        displayMarker(userLocation, infoMessage);
-      }
-
-      function displayMarker(userLocation, infoMessage) {
-        let marker = new kakao.maps.Marker({
-          map: map,
-          position: userLocation,
-        });
-
-        let iwContent = infoMessage;
-        let iwRemoveable = true;
-
-        let infowindow = new kakao.maps.InfoWindow({
-          content: iwContent,
-          removable: iwRemoveable,
-        });
-
-        infowindow.open(map, marker);
-        map.setCenter(userLocation);
-      }
-    }
-  }, []);
-
   return (
     <div className="Home">
-      <div className="map-container">
+      <div id="map-container" className="map-container"></div>{" "}
+      {/* 지도 컨테이너 */}
+      <div className="search-bar">
         <input
-          className="search-bar"
-          placeholder="역 이름을 입력해주세요"
-          value={search}
-          onChange={onChangeSearch}
+          className="search-bar1"
+          placeholder="출발지 입력"
+          value={startLocation}
+          onChange={(e) => setStartLocation(e.target.value)}
         />
-        <div ref={mapContainer} className="map" style={{ width: "100%" }}></div>
+        <input
+          className="search-bar2"
+          placeholder="도착지 입력"
+          value={endLocation}
+          onChange={(e) => setEndLocation(e.target.value)}
+        />
+        <RoadButton className="view-route" onClick={handleSearchRoute} />
       </div>
-
-      <div className="road-list-container">
-        <div className="road-list-title">
-          <span className="recomend-route">🏃🏻 추천 경로</span>
-        </div>
-        {filteredRoutes.map((route) => (
-          <RoadItem key={route.id} route={route} />
-        ))}
-      </div>
-      <Nav className="navigation" />
+      <Nav />
     </div>
   );
 };

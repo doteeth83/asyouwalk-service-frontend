@@ -17,6 +17,7 @@ import Calorie from "./pages/Calorie";
 import PloggingRegister from "./pages/PloggingRegister";
 import PloggingDetail from "./pages/PloggingDetail";
 import PloggingPhoto from "./pages/PloggingPhoto";
+import TmapRoute from "./pages/TmapRoute";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           {/* 경로 화면*/}
           <Route path="/short/:routeId" element={<RoadDetail />} />
           <Route path="/plogging/:routeId" element={<PloggingDetail />} />
+          <Route path="/tmap" element={<TmapRoute />} />
           {/* 플로깅 화면*/}
 
           <Route exact path="/plogging" element={<PloggingRegister />} />
