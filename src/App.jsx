@@ -6,18 +6,19 @@ import "./index.css";
 //컴포넌트 import
 import Landing from "./pages/Landing";
 import Home from "./pages/Home";
-import RoadDetail from "./pages/RoadDetail";
+//import RoadDetail from "./pages/RoadDetail";
 import Target from "./pages/Target";
 import Mypage from "./pages/MyPage";
 import Login from "./pages/Login";
-import Register from "./pages/Register";
+
 import BodyInfo from "./pages/BodyInfo";
 import Calorie from "./pages/Calorie";
 
 import PloggingRegister from "./pages/PloggingRegister";
-import PloggingDetail from "./pages/PloggingDetail";
+//import PloggingDetail from "./pages/PloggingDetail";
 import PloggingPhoto from "./pages/PloggingPhoto";
 import TmapRoute from "./pages/TmapRoute";
+import ProductList from "./pages/ProductList";
 
 function App() {
   return (
@@ -38,8 +39,8 @@ function App() {
           <Route exact path="/" element={<Landing />} />
           <Route exact path="/home" element={<Home />} />
           {/* 경로 화면*/}
-          <Route path="/short/:routeId" element={<RoadDetail />} />
-          <Route path="/plogging/:routeId" element={<PloggingDetail />} />
+          {/*<Route path="/short/:routeId" element={<RoadDetail />} /> */}
+          {/*<Route path="/plogging/:routeId" element={<PloggingDetail />} />*/}
           <Route path="/tmap" element={<TmapRoute />} />
           {/* 플로깅 화면*/}
 
@@ -51,8 +52,11 @@ function App() {
           <Route exact path="/target" element={<Target />} />
           {/*로그인 페이지*/}
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+
           <Route path="/mypage" element={<Mypage />} />
+
+          {/*상점*/}
+          <Route path="/shop" element={<ProductList />} />
         </Routes>
       </div>
     </BrowserRouter>
