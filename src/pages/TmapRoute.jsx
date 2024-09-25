@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import RouteInfo from "../components/RouteInfo";
-
+import "../styles/TmapRoute.css";
 const TmapRoute = () => {
   const [startLocation, setStartLocation] = useState("");
   const [endLocation, setEndLocation] = useState("");
@@ -137,30 +137,31 @@ const TmapRoute = () => {
 
   return (
     <div>
-      <h1>보행자 경로 찾기</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>출발지: </label>
+        <div className="search-bar">
           <input
             type="text"
             value={startLocation}
             onChange={(e) => setStartLocation(e.target.value)}
             required
+            className="search-bar1"
           />
-        </div>
-        <div>
-          <label>도착지: </label>
+
           <input
             type="text"
             value={endLocation}
             onChange={(e) => setEndLocation(e.target.value)}
             required
+            className="search-bar2"
           />
+
+          <button className="show-road" type="submit">
+            경로 찾기
+          </button>
         </div>
-        <button type="submit">경로 찾기</button>
       </form>
 
-      <div id="map_div" style={{ width: "100%", height: "500px" }}></div>
+      <div id="map_div" style={{ width: "100%", height: "60vh" }}></div>
       <RouteInfo />
     </div>
   );
