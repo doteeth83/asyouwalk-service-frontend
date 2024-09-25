@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/Register.css";
+import "../styles/Login.css";
 import axios from "axios";
 import { IoIosArrowBack } from "react-icons/io";
 
@@ -8,40 +8,47 @@ function Login() {
   const [memberId, setMemberId] = useState("");
   const [password, setPassword] = useState("");
   const nav = useNavigate();
-  const API_BASE_URL = "https://asyouwork.com:8443/api";
 
   const isFormFilled = memberId.length > 0 && password.length > 0;
+  const API_BASE_URL = "https://asyouwork.com:8443";
 
-  const handleLogin = () => {
-    axios
-      .post(`${API_BASE_URL}/users/login`, {
+  const handleLogin = async () => {
+    try {
+      // FormData 대신 JSON 데이터를 전송
+      const formData = {
         memberId: memberId,
         password: password,
-      })
-      .then((response) => {
-        console.log("로그인 성공", response.data);
-        const userId = response.data.userId;
-        localStorage.setItem("userId", userId);
+      };
+
+      const response = await axios.post(`${API_BASE_URL}/login`, formData, {
+        headers: {
+          "Content-Type": "application/json", // JSON 전송
+        },
+      });
+
+      // 서버에서 헤더로 전달된 토큰 추출
+      const token = response.headers["authorization"]; // 'authorization' 헤더에서 토큰 추출
+
+      if (token) {
+        // Bearer 를 포함하여 로컬 스토리지에 토큰 저장
+        localStorage.setItem("token", token);
+
+        console.log("토큰:", token);
 
         alert("로그인 성공");
-        nav("/mypage");
-      })
-      .catch((error) => {
-        console.error("로그인 실패", error);
-        alert("로그인 실패: " + (error.response?.data || error.message));
-      });
-  };
-
-  const handleSignUpClick = () => {
-    nav("/register");
+        nav("/"); // 로그인 성공 후 메인 페이지로 이동
+      } else {
+        throw new Error("토큰을 받지 못했습니다.");
+      }
+    } catch (error) {
+      console.error("로그인 실패", error);
+      alert("로그인 실패: " + (error.response?.data || error.message));
+    }
   };
 
   return (
     <div className="Login">
-      <IoIosArrowBack
-        onClick={() => nav("/home")}
-        className="arrow-back-black"
-      />
+      <IoIosArrowBack onClick={() => nav("/")} className="arrow-back-black" />
       <div className="Nelogin-container">
         <div className="Neright-section">
           <h2>로그인</h2>
@@ -74,11 +81,6 @@ function Login() {
           >
             로그인
           </button>
-          <div className="Nedivider">———————— 또는 ————————</div>
-          <p className="Nesignup-prompt">
-            아직 회원이 아니신가요?
-            <span onClick={handleSignUpClick}> 회원가입 하러 가기</span>
-          </p>
         </div>
       </div>
     </div>
