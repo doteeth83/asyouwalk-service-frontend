@@ -6,7 +6,6 @@ const SearchForm = ({
   endLocation,
   setEndLocation,
   onSubmit,
-  onComplete,
   onPlogging,
 }) => (
   <form onSubmit={onSubmit}>
@@ -35,7 +34,7 @@ const SearchForm = ({
         <button type="submit" className="show-road">
           기본 경로 찾기
         </button>
-        <button type="button" onClick={onComplete} className="complete-button">
+        <button type="button" className="complete-button">
           완료
         </button>
         <button type="button" onClick={onPlogging} className="plogging-button">

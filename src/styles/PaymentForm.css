@@ -1,0 +1,67 @@
+.PaymentForm {
+  height: 100vh;
+  display: flex;
+
+  align-items: center;
+  flex-direction: column;
+}
+.item-img {
+  margin-top: 140px;
+  height: 350px;
+  width: 100%;
+}
+.pay-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.PaymentForm input {
+  border: none;
+}
+.pay-name {
+  font-size: 25px;
+}
+.pay-price {
+  font-size: 30px;
+  font-weight: bold;
+}
+/*결제 nav*/
+.pay-method {
+  position: fixed; /* fixed로 화면에 고정 */
+  bottom: 0; /* 화면의 하단에 위치 */
+  left: 0; /* 왼쪽에 맞추기 */
+  width: 400px;
+
+  display: flex;
+  z-index: 100; /* 다른 요소 위에 표시되도록 설정 */
+}
+.pay-method select {
+  background-color: rgb(213, 213, 213);
+  padding: 20px;
+  width: 200px;
+  font-size: 20px;
+  border: none;
+}
+.pay-method button {
+  background-color: #ff4d3f;
+  border: none;
+  padding: 20px;
+  width: 200px;
+  color: white;
+  font-size: 20px;
+}
+/*헤더*/
+.pay-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 30px;
+  padding-left: 20px;
+}
+.pay-header span {
+  font-size: 24px;
+}
+.arrow-back-pay {
+  font-size: 40px;
+  margin-right: 90px;
+}
