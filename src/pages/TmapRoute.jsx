@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import RouteInfo from "../components/RouteInfo";
 import Nav from "../components/Nav";
 import SearchForm from "../components/SearchForm";
+import axios from "axios";
+
 import {
   fetchCoordinates,
   fetchRoute,
@@ -18,6 +20,8 @@ const TmapRoute = () => {
   const [endCoords, setEndCoords] = useState(null);
   const { mapInstance, initializeMap, destroyMap } = useMap();
 
+  const API_BASE_URL = "https://asyouwork.com:8443/api";
+
   // 폼 제출 시 호출
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,23 +35,39 @@ const TmapRoute = () => {
     }
   };
 
-  // 완료 버튼 클릭 시 거리 POST 요청
   const handleComplete = async () => {
     try {
       if (startCoords && endCoords) {
+        // 경로 거리 계산
         const distance = await fetchRoute(
           startCoords,
           endCoords,
           initializeMap,
           mapInstance
         );
-        await postDistance(distance);
+
+        // 거리 정보를 /api/co2-records/calculate 엔드포인트로 POST 요청
+        const response = await axios.post(
+          `${API_BASE_URL}/co2-records/calculate`,
+          {
+            distance,
+          }
+        );
+
+        if (response.status === 200) {
+          console.log("거리 정보를 성공적으로 전송했습니다:", distance);
+        } else {
+          console.error(
+            "거리 정보를 전송하는 중 오류가 발생했습니다: ",
+            response.status
+          );
+        }
       }
     } catch (error) {
       console.error("거리 정보를 전송하는 중 오류가 발생했습니다:", error);
+      alert("거리 정보를 전송하는 중 문제가 발생했습니다. 다시 시도해주세요.");
     }
   };
-
   useEffect(() => {
     if (startCoords && endCoords) {
       fetchRoute(startCoords, endCoords, initializeMap, mapInstance);

@@ -12,7 +12,10 @@ const Nav = () => {
   const location = useLocation();
 
   const goHome = () => {
-    nav("/home");
+    nav("/tmap");
+  };
+  const goShop = () => {
+    nav("/shop");
   };
   const goRoute = () => {
     nav("/route/:routeId");
@@ -28,11 +31,14 @@ const Nav = () => {
     <div className="Nav">
       <div
         onClick={goHome}
-        className={`home ${location.pathname === "/home" ? "active" : ""}`}
+        className={`home ${location.pathname === "/tmap" ? "active" : ""}`}
       >
         <IoHomeOutline className="nav-icon" />홈
       </div>
-      <div className="giftshop">
+      <div
+        onClick={goShop}
+        className={`giftshop ${location.pathname === "/shop" ? "active" : ""}`}
+      >
         <GoGift className="nav-icon" />
         상점
       </div>
