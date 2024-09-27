@@ -30,7 +30,7 @@ const Landing = () => {
         </p>
         <LongButton
           type={"goHome"}
-          onClick={() => nav("/home")}
+          onClick={() => nav("/tmap")}
           className="Landing-btn"
           text={"탐색하러가기"}
         />

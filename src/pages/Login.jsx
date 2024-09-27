@@ -14,7 +14,7 @@ function Login() {
 
   const handleLogin = async () => {
     try {
-      // FormData 대신 JSON 데이터를 전송
+      // 로그인 폼 데이터를 JSON으로 전송
       const formData = {
         memberId: memberId,
         password: password,
@@ -22,11 +22,11 @@ function Login() {
 
       const response = await axios.post(`${API_BASE_URL}/login`, formData, {
         headers: {
-          "Content-Type": "application/json", // JSON 전송
+          "Content-Type": "application/json",
         },
       });
 
-      // 서버에서 헤더로 전달된 토큰 추출
+      // 서버에서 'authorization' 헤더로 전달된 토큰 추출
       const token = response.headers["authorization"]; // 'authorization' 헤더에서 토큰 추출
 
       if (token) {

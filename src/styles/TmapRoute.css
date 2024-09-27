@@ -25,22 +25,6 @@
   overflow-y: auto; /* 스크롤이 가능하도록 설정 */
 }
 
-.search-bar {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  width: 90%;
-  height: 50px;
-  margin-top: 20px;
-  padding-left: 20px;
-  border: none;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
 .search-bar1,
 .search-bar2 {
   width: 100%;
@@ -74,22 +58,13 @@
   height: 100%; /* 부모 요소에 맞춰서 100%로 설정 */
 }
 
-.search-bar1::before,
-.search-bar2::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
+.start-icon {
+  border-radius: 100px;
+  border: 1px solid blue;
+  width: 20px;
+  height: 20px;
+  padding: 8px;
 }
-
-.search-bar1::before {
-  background-color: blue; /* 출발지 - 파란색 동그라미 */
-}
-
-.search-bar2::before {
-  background-color: red; /* 도착지 - 빨간색 동그라미 */
+.start-box {
+  display: flex;
 }

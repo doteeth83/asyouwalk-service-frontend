@@ -1,13 +1,12 @@
-{
-  /*import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../styles/Road.css";
-import Map from "../components/Map";
+
 import Header from "../components/Header";
 import Nav from "../components/Nav";
 import shortRouteList from "../util/shortRouteList"; // 경로 목록 임포트
 
-const RouteDetail = () => {
+const RouteInfo = () => {
   const { routeId } = useParams();
   const [route, setRoute] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -60,6 +59,4 @@ const RouteDetail = () => {
   );
 };
 
-export default RouteDetail;
-*/
-}
+export default RouteInfo;

@@ -3,10 +3,10 @@
   --vh: 100%;
 }
 /*높이가 필요한 곳에 사용 height: calc(var(--vh, 1vh) * 100);*/
+html,
 body {
-  margin-left: auto;
-  margin-right: auto;
-  background-color: #eaeaea;
-  max-width: 400px;
-  height: 100vh;
+  margin: 0;
+  padding: 0;
+  width: 400px;
+  height: 100vh; /* 아이폰 14 Pro의 뷰포트 높이 */
 }

@@ -138,15 +138,18 @@ const TmapRoute = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div className="search-bar">
-          <input
-            type="text"
-            value={startLocation}
-            onChange={(e) => setStartLocation(e.target.value)}
-            required
-            className="search-bar1"
-          />
-
+        <span className="search-bar">
+          <div className="start-box">
+            <div className="start-icon"></div>
+            <input
+              type="text"
+              value={startLocation}
+              onChange={(e) => setStartLocation(e.target.value)}
+              required
+              className="search-bar1"
+            />
+          </div>
+          <span className="end-icon"></span>
           <input
             type="text"
             value={endLocation}
@@ -154,11 +157,10 @@ const TmapRoute = () => {
             required
             className="search-bar2"
           />
-
           <button className="show-road" type="submit">
             경로 찾기
           </button>
-        </div>
+        </span>
       </form>
 
       <div id="map_div" style={{ width: "100%", height: "60vh" }}></div>

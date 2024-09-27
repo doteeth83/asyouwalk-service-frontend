@@ -105,3 +105,9 @@ h2 {
   position: fixed;
   bottom: 0;
 }
+
+/*바코드 이미지*/
+.barcode-image {
+  max-width: 150px;
+  height: auto;
+}
