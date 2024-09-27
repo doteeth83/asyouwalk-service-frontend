@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import RouteInfo from "../components/RouteInfo";
 import "../styles/TmapRoute.css";
+import Nav from "../components/Nav";
 const TmapRoute = () => {
   const [startLocation, setStartLocation] = useState("");
   const [endLocation, setEndLocation] = useState("");
@@ -165,6 +166,7 @@ const TmapRoute = () => {
 
       <div id="map_div" style={{ width: "100%", height: "60vh" }}></div>
       <RouteInfo />
+      <Nav />
     </div>
   );
 };
