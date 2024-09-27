@@ -14,15 +14,14 @@ function Login() {
 
   const handleLogin = async () => {
     try {
-      // 로그인 폼 데이터를 JSON으로 전송
-      const formData = {
-        memberId: memberId,
-        password: password,
-      };
+      // FormData 객체 생성
+      const formData = new FormData();
+      formData.append("memberId", memberId);
+      formData.append("password", password);
 
       const response = await axios.post(`${API_BASE_URL}/login`, formData, {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
       });
 
