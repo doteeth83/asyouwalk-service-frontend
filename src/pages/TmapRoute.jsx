@@ -3,6 +3,7 @@ import axios from "axios";
 import RouteInfo from "../components/RouteInfo";
 import "../styles/TmapRoute.css";
 import Nav from "../components/Nav";
+
 const TmapRoute = () => {
   const [startLocation, setStartLocation] = useState("");
   const [endLocation, setEndLocation] = useState("");
@@ -13,6 +14,8 @@ const TmapRoute = () => {
   const headers = {
     appKey: import.meta.env.VITE_TMAP_API_KEY,
   };
+
+  const API_BASE_URL = "https://asyouwork.com:8443/api";
 
   // 장소(POI) 검색 API 호출
   const fetchCoordinates = async (locationName) => {
@@ -73,6 +76,7 @@ const TmapRoute = () => {
       const features = data.features;
 
       let drawInfoArr = [];
+      let totalDistance = 0; // 총 거리 계산 변수
 
       features.forEach((feature) => {
         const geometry = feature.geometry;
@@ -82,6 +86,9 @@ const TmapRoute = () => {
               new window.Tmapv2.LatLng(coordinate[1], coordinate[0])
             );
           });
+          if (feature.properties && feature.properties.totalDistance) {
+            totalDistance += feature.properties.totalDistance; // 총 거리 계산
+          }
         }
       });
 
@@ -109,11 +116,53 @@ const TmapRoute = () => {
     }
   };
 
+  // 쓰레기통 경로 API 호출
+  const fetchPloggingRoute = async (startCoords, endCoords) => {
+    try {
+      await axios.post(`${API_BASE_URL}/trashbins`, {
+        startLatitude: startCoords.lat,
+        startLongitude: startCoords.lng,
+        endLatitude: endCoords.lat,
+        endLongitude: endCoords.lng,
+      });
+
+      const response = await axios.get(`${API_BASE_URL}/findBetween`);
+      const trashBinCoords = response.data;
+
+      trashBinCoords.forEach((coords) => {
+        new window.Tmapv2.Marker({
+          position: new window.Tmapv2.LatLng(coords.lat, coords.lng),
+          map: mapInstance,
+        });
+      });
+    } catch (error) {
+      console.error("쓰레기통 경로를 가져오는 중 오류가 발생했습니다:", error);
+    }
+  };
+  // 총 거리 데이터를 서버로 POST하는 함수
+  async function getDistanceAndPost(distance) {
+    const distanceValue = parseFloat(distance);
+    try {
+      // 서버로 POST 요청 보내기
+      const postResponse = await axios.post(`${API_BASE_URL}/co2-records`, {
+        distance: distanceValue, // 서버에 보낼 데이터
+      });
+
+      // POST 응답 처리
+      if (postResponse.status === 200) {
+        console.log("데이터 전송 성공");
+      } else {
+        console.error("데이터 전송 실패");
+      }
+    } catch (error) {
+      console.error("오류 발생:", error);
+    }
+  }
+
   // 폼 제출 시 호출
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // 출발지와 도착지의 좌표를 각각 검색
       const startCoords = await fetchCoordinates(startLocation);
       const endCoords = await fetchCoordinates(endLocation);
 
@@ -124,7 +173,6 @@ const TmapRoute = () => {
     }
   };
 
-  // 출발지와 도착지 좌표가 업데이트되면 경로 API 호출
   useEffect(() => {
     if (startCoords && endCoords) {
       fetchRoute(startCoords, endCoords);
@@ -150,17 +198,36 @@ const TmapRoute = () => {
               className="search-bar1"
             />
           </div>
-          <span className="end-icon"></span>
-          <input
-            type="text"
-            value={endLocation}
-            onChange={(e) => setEndLocation(e.target.value)}
-            required
-            className="search-bar2"
-          />
-          <button className="show-road" type="submit">
-            경로 찾기
-          </button>
+          <div className="end-box">
+            <span className="end-icon"></span>
+            <input
+              type="text"
+              value={endLocation}
+              onChange={(e) => setEndLocation(e.target.value)}
+              required
+              className="search-bar2"
+            />
+          </div>
+          <div className="route-buttons">
+            <button
+              onClick={() => fetchRoute(startCoords, endCoords)}
+              className="show-road"
+            >
+              기본 경로 찾기
+            </button>
+            <button
+              onClick={() => getDistanceAndPost()} // 완료 버튼 클릭 시 getDistanceAndPost 호출
+              className="complete-button"
+            >
+              완료
+            </button>
+            <button
+              onClick={() => fetchPloggingRoute(startCoords, endCoords)}
+              className="plogging-button"
+            >
+              플로깅 경로 찾기
+            </button>
+          </div>
         </span>
       </form>
 
