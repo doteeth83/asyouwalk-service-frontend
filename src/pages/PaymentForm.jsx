@@ -36,7 +36,7 @@ function PaymentForm() {
             "Content-Type": "application/json",
             Authorization:
               "Bearer eyJhbGciOiJIUzI1NiJ9.eyJtZW1iZXJJZCI6InVzZXIxIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNzQ5NjE5NCwiZXhwIjoxNzI3NTMyMTk0fQ.D34AxJeu7il_ehK1QFRg8UfMIYGMbpFNHUsTp_P5IXs",
-          },
+          }, // 토큰 설정
           body: JSON.stringify({
             price: itemPrice,
             productId: product.id, // ProductList에서 전달된 상품 ID 사용
