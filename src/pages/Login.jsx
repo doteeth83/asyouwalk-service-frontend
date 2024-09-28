@@ -35,7 +35,7 @@ function Login() {
         console.log("토큰:", token);
 
         alert("로그인 성공");
-        nav("/"); // 로그인 성공 후 메인 페이지로 이동
+        nav("/mypage"); // 로그인 성공 후 메인 페이지로 이동
       } else {
         throw new Error("토큰을 받지 못했습니다.");
       }

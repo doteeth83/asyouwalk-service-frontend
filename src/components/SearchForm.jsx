@@ -31,7 +31,7 @@ const SearchForm = ({
         />
       </div>
       <div className="route-buttons">
-        <button type="submit" className="show-road">
+        <button type="submit" className="show-route">
           기본 경로 찾기
         </button>
         <button type="button" className="complete-button">

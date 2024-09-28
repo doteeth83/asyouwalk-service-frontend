@@ -13,7 +13,7 @@ function PaymentForm() {
   const [itemPrice, setItemPrice] = useState(product.productPrice || 101);
   const [paymentMethod, setPaymentMethod] = useState("CARD");
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
+  const nav = useNavigate();
 
   const handleOrderAndPayment = async (e) => {
     e.preventDefault();
@@ -88,7 +88,10 @@ function PaymentForm() {
   return (
     <div>
       <div className="pay-header">
-        <IoIosArrowBack onClick={() => nav("/")} className="arrow-back-pay" />
+        <IoIosArrowBack
+          onClick={() => nav("/shop")}
+          className="arrow-back-pay"
+        />
         <span className="go-pay">결제하기</span>
       </div>
       <div className="PaymentForm">

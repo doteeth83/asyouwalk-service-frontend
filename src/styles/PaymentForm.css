@@ -6,7 +6,7 @@
   flex-direction: column;
 }
 .item-img {
-  margin-top: 140px;
+  margin-top: 100px;
   height: 350px;
   width: 100%;
 }
@@ -31,7 +31,7 @@
   bottom: 0; /* 화면의 하단에 위치 */
   left: 0; /* 왼쪽에 맞추기 */
   width: 400px;
-
+  background-color: white;
   display: flex;
   z-index: 100; /* 다른 요소 위에 표시되도록 설정 */
 }

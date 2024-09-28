@@ -18,7 +18,7 @@ const Nav = () => {
     nav("/shop");
   };
   const goRoute = () => {
-    nav("/route/:routeId");
+    nav("/tmap");
   };
   const goPlogging = () => {
     nav("/plogging");

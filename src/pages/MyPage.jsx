@@ -18,6 +18,28 @@ const MyPage = () => {
   const navigate = useNavigate();
   const API_BASE_URL = "https://asyouwork.com:8443/api";
 
+  useEffect(() => {
+    // useEffect를 사용하여 컴포넌트가 마운트될 때 API 호출
+    const token = localStorage.getItem("token"); // 로컬 스토리지에서 토큰 가져오기
+
+    // API 호출 및 데이터 수신
+    axios
+      .get(`${API_BASE_URL}/mypage`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // 헤더에 토큰 추가
+        },
+      })
+      .then((response) => {
+        // API 응답 데이터를 받아와서 상태 변수에 설정
+        const userData = response.data;
+        setUserName(userData.memberId);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+        // 오류 처리
+      });
+  }, []);
+
   const goTarget = () => {
     navigate("/target");
   };
@@ -29,12 +51,17 @@ const MyPage = () => {
   const goToBodyInfo = () => {
     navigate("/body-info");
   };
-  useEffect(() => {
-    const userId = localStorage.getItem("userId");
 
-    if (userId) {
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
       axios
-        .get(`${API_BASE_URL}/users/${userId}`)
+        .get(`${API_BASE_URL}/users`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Authorization 헤더에 토큰 추가
+          },
+        })
         .then((response) => {
           console.log("User info fetched successfully", response.data);
           setUserInfo(response.data);
@@ -44,7 +71,7 @@ const MyPage = () => {
           navigate("/login");
         });
     } else {
-      navigate("/login");
+      navigate("/login"); // 토큰이 없으면 로그인 페이지로 이동
     }
   }, [navigate]);
 
