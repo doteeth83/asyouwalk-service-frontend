@@ -25,20 +25,31 @@ function Login() {
         },
       });
 
+      // 서버로부터 받은 데이터를 확인
+      const loginData = response.data;
+
+      if (loginData && loginData.memberId) {
+        // memberId를 로컬 스토리지에 저장
+        localStorage.setItem("memberId", loginData.memberId);
+        console.log("로그인 성공, memberId:", loginData.memberId);
+      } else {
+        throw new Error("로그인 실패: 사용자 ID를 받지 못했습니다.");
+      }
+
       // 서버에서 'authorization' 헤더로 전달된 토큰 추출
       const token = response.headers["authorization"]; // 'authorization' 헤더에서 토큰 추출
 
       if (token) {
         // Bearer 를 포함하여 로컬 스토리지에 토큰 저장
         localStorage.setItem("token", token);
-
-        console.log("토큰:", token);
-
-        alert("로그인 성공");
-        nav("/mypage"); // 로그인 성공 후 메인 페이지로 이동
+        console.log("토큰 저장:", token);
       } else {
         throw new Error("토큰을 받지 못했습니다.");
       }
+
+      // 로그인 성공 시 마이페이지로 이동
+      alert("로그인 성공");
+      nav("/mypage");
     } catch (error) {
       console.error("로그인 실패", error);
       alert("로그인 실패: " + (error.response?.data || error.message));

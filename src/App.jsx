@@ -20,6 +20,7 @@ import PloggingPhoto from "./pages/PloggingPhoto";
 import TmapRoute from "./pages/TmapRoute";
 import ProductList from "./pages/ProductList";
 import PaymentForm from "./pages/PaymentForm";
+import PaymentSuccess from "./pages/PaymentSuccess";
 function App() {
   return (
     <BrowserRouter>
@@ -58,6 +59,7 @@ function App() {
           {/*상점*/}
           <Route path="/shop" element={<ProductList />} />
           <Route path="/payment" element={<PaymentForm />} />
+          <Route path="/sucess" element={<PaymentSuccess />} />
         </Routes>
       </div>
     </BrowserRouter>

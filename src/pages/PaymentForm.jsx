@@ -20,6 +20,14 @@ function PaymentForm() {
     setIsLoading(true);
 
     try {
+      // 로컬 스토리지에서 token과 memberId 가져오기
+      const token = localStorage.getItem("token");
+      const memberId = localStorage.getItem("memberId");
+
+      if (!token) {
+        throw new Error("로그인이 필요합니다.");
+      }
+
       const orderResponse = await fetch(
         "https://asyouwork.com:8443/api/orders",
         {
@@ -27,12 +35,12 @@ function PaymentForm() {
           headers: {
             "Content-Type": "application/json",
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJtZW1iZXJJZCI6InVzZXIxIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNzQ0NjEzNSwiZXhwIjoxNzI3NDQ5NzM1fQ.RpXXBlnQZaDCiEQux2RHDuSn4WhIWNJlWBbTbN2nqgQ", // 필요에 따라 JWT 토큰을 변경하세요
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJtZW1iZXJJZCI6InVzZXIxIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNzQ5NjE5NCwiZXhwIjoxNzI3NTMyMTk0fQ.D34AxJeu7il_ehK1QFRg8UfMIYGMbpFNHUsTp_P5IXs", // token을 Authorization 헤더에 추가
           },
           body: JSON.stringify({
             price: itemPrice,
-            productId: product.id, // ProductList에서 전달된 상품 ID 사용
-            userId: 1,
+            productId: 2, // ProductList에서 전달된 상품 ID 사용
+            userId: 1, // 로컬 스토리지에서 가져온 memberId를 userId로 사용
           }),
         }
       );
@@ -84,7 +92,6 @@ function PaymentForm() {
       .map((word) => word.toString(16).padStart(8, "0"))
       .join("");
   };
-
   return (
     <div>
       <div className="pay-header">

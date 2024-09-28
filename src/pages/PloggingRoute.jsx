@@ -4,10 +4,25 @@ import axios from "axios";
 const PloggingRoute = ({ startCoords, endCoords }) => {
   const [mapInstance, setMapInstance] = useState(null);
   const [trashBins, setTrashBins] = useState([]);
+  ㅡ;
   const headers = {
-    appKey: import.meta.env.VITE_TMAP_API_KEY,
+    appKey: import.meta.env.VITE_TMAP_API_KEY, // 환경 변수에서 API 키 가져오기
   };
   const API_BASE_URL = "https://asyouwork.com:8443/api";
+  let resultDrawArr = [];
+
+  // 지도 초기화 함수
+  const initTmap = () => {
+    const map = new window.Tmapv2.Map("map_div", {
+      center: new window.Tmapv2.LatLng(startCoords.lat, startCoords.lng),
+      width: "100%",
+      height: "400px",
+      zoom: 17,
+      zoomControl: true,
+      scrollwheel: true,
+    });
+    setMapInstance(map);
+  };
 
   // 쓰레기통 좌표 받아오기
   const fetchTrashBinCoords = async () => {
@@ -25,7 +40,7 @@ const PloggingRoute = ({ startCoords, endCoords }) => {
           headers: {
             "Content-Type": "application/json",
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJtZW1iZXJJZCI6InVzZXIxIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNzQ5NjE5NCwiZXhwIjoxNzI3NTMyMTk0fQ.D34AxJeu7il_ehK1QFRg8UfMIYGMbpFNHUsTp_P5IXs",
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJtZW1iZXJJZCI6InVzZXIxIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNzQ5NjE5NCwiZXhwIjoxNzI3NTMyMTk0fQ.D34AxJeu7il_ehK1QFRg8UfMIYGMbpFNHUsTp_P5IXs", // 토큰 설정
           },
         }
       );
@@ -38,77 +53,13 @@ const PloggingRoute = ({ startCoords, endCoords }) => {
     }
   };
 
-  // 플로깅 경로 그리기
-  const fetchRouteWithWaypoints = async (trashBins) => {
-    const pedestrianUrl =
-      "https://apis.openapi.sk.com/tmap/routes/pedestrian?version=1";
-
-    const waypointCoords = trashBins.map((bin) => ({
-      lon: bin.lng,
-      lat: bin.lat,
-    }));
-
-    const requestData = {
-      startX: startCoords.lng,
-      startY: startCoords.lat,
-      endX: endCoords.lng,
-      endY: endCoords.lat,
-      passList: waypointCoords.map((wp) => `${wp.lon},${wp.lat}`).join("_"),
-      reqCoordType: "WGS84GEO",
-      resCoordType: "WGS84GEO",
-      startName: "출발지",
-      endName: "도착지",
-    };
-
-    try {
-      const response = await axios.post(pedestrianUrl, requestData, {
-        headers: {
-          "Content-Type": "application/json",
-          appKey: headers.appKey,
-        },
-      });
-
-      const data = response.data;
-      const features = data.features;
-
-      let drawInfoArr = [];
-
-      features.forEach((feature) => {
-        const geometry = feature.geometry;
-        if (geometry.type === "LineString") {
-          geometry.coordinates.forEach((coordinate) => {
-            drawInfoArr.push(
-              new window.Tmapv2.LatLng(coordinate[1], coordinate[0])
-            );
-          });
-        }
-      });
-
-      if (!mapInstance) {
-        const newMapInstance = new window.Tmapv2.Map("map_div", {
-          center: new window.Tmapv2.LatLng(startCoords.lat, startCoords.lng),
-          width: "100%",
-          height: "400px",
-          zoom: 15,
-        });
-        setMapInstance(newMapInstance);
-      }
-
-      new window.Tmapv2.Polyline({
-        path: drawInfoArr,
-        strokeColor: "#00FF00", // 플로깅 경로는 초록색으로
-        strokeWeight: 6,
-        map: mapInstance,
-      });
-    } catch (error) {
-      console.error("경로를 가져오는 중 오류가 발생했습니다:", error);
-    }
-  };
-
   useEffect(() => {
     if (startCoords && endCoords) {
+      if (!mapInstance) {
+        initTmap(); // TMap 초기화
+      }
       fetchTrashBinCoords().then((trashBins) => {
-        fetchRouteWithWaypoints(trashBins);
+        fetchRouteWithWaypoints(trashBins); // 경로 그리기 호출
       });
     }
   }, [startCoords, endCoords]);
