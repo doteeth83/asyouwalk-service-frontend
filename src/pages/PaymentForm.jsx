@@ -18,7 +18,7 @@ function PaymentForm() {
   const handleOrderAndPayment = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-
+    const API_BASE_URL = "https://asyouwork.com:8443/api";
     try {
       // 로컬 스토리지에서 token과 memberId 가져오기
       const token = localStorage.getItem("token");
@@ -35,12 +35,12 @@ function PaymentForm() {
           headers: {
             "Content-Type": "application/json",
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJtZW1iZXJJZCI6InVzZXIxIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNzQ5NjE5NCwiZXhwIjoxNzI3NTMyMTk0fQ.D34AxJeu7il_ehK1QFRg8UfMIYGMbpFNHUsTp_P5IXs", // token을 Authorization 헤더에 추가
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJtZW1iZXJJZCI6InVzZXIxIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNzQ5NjE5NCwiZXhwIjoxNzI3NTMyMTk0fQ.D34AxJeu7il_ehK1QFRg8UfMIYGMbpFNHUsTp_P5IXs",
           },
           body: JSON.stringify({
             price: itemPrice,
-            productId: 2, // ProductList에서 전달된 상품 ID 사용
-            userId: 1, // 로컬 스토리지에서 가져온 memberId를 userId로 사용
+            productId: product.id, // ProductList에서 전달된 상품 ID 사용
+            userId: memberId, // 로컬 스토리지에서 가져온 memberId를 userId로 사용
           }),
         }
       );
@@ -63,7 +63,7 @@ function PaymentForm() {
         customer: {
           phoneNumber: "010-4187-7322",
         },
-        redirectUrl: `https://localhost:3000/success`,
+        redirectUrl: "https://asyouwalk.vercel.app/sucess",
         noticeUrls: ["https://localhost:8080/api/orders/webhook"],
         customData: {
           orderId: orderData.orderId,

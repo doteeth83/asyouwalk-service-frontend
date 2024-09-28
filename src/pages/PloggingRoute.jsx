@@ -39,6 +39,7 @@ const PloggingRoute = ({ startCoords, endCoords }) => {
           },
           headers: {
             "Content-Type": "application/json",
+
             Authorization:
               "Bearer eyJhbGciOiJIUzI1NiJ9.eyJtZW1iZXJJZCI6InVzZXIxIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTcyNzQ5NjE5NCwiZXhwIjoxNzI3NTMyMTk0fQ.D34AxJeu7il_ehK1QFRg8UfMIYGMbpFNHUsTp_P5IXs", // 토큰 설정
           },
@@ -46,6 +47,7 @@ const PloggingRoute = ({ startCoords, endCoords }) => {
       );
 
       setTrashBins(response.data);
+      console.log(response.data);
       return response.data;
     } catch (error) {
       console.error("쓰레기통 좌표를 가져오는 중 오류가 발생했습니다:", error);
