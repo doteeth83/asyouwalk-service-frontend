@@ -43,7 +43,8 @@ const ProductList = () => {
       <div className="container">
         {products.length > 0 ? (
           products.map((product) => (
-            <div className="product-card" key={product.id}>
+            <div className="product-card" key={product.productId}>
+              <p>{product.productId}</p>
               <div className="product-image">
                 <img
                   src={product.productPictureUrl}

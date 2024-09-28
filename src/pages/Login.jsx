@@ -31,6 +31,7 @@ function Login() {
       if (loginData && loginData.memberId) {
         // memberId를 로컬 스토리지에 저장
         localStorage.setItem("memberId", loginData.memberId);
+
         console.log("로그인 성공, memberId:", loginData.memberId);
       } else {
         throw new Error("로그인 실패: 사용자 ID를 받지 못했습니다.");
